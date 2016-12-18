@@ -1,0 +1,153 @@
+.create{
+  width: 1000px;
+  height: auto;
+  margin: auto;
+  padding-top: 16px;
+}
+.createBox{
+  width: 1000px;
+  height: 1008px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+.createContent{
+  width: 3000px;
+  height: auto;
+  background-color: transparent;
+  position: absolute;
+  transition:all 1s ease-in-out;
+  -moz-transition:all 1s ease-in-out; /* Firefox 4 */
+  -webkit-transition:all 1s ease-in-out; /* Safari and Chrome */
+  -o-transition:all 1s ease-in-out; /* Opera */
+  left: 0;
+}
+.createContent .box{
+  width: 1000px;
+  float: left;
+  background-color: white;
+  height: 450px;
+}
+.createContent .box:first-child{
+  height: 1008px;
+}
+.move{
+  left: -1000px;
+}
+.moveOther{
+  left: -2000px;
+}
+.createTitle{
+  width: 952px;
+  height: 48px;
+  margin: auto;
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+.createTitle>div{
+  width: 318px;
+  height: 48px;
+  margin-left: 8px;
+  float: left;
+}
+.createTitle>div:first-child{
+  margin-left: 0;
+  background-image: url("../../images/添加封面及相关信息h.png");
+}
+.createTitle>div:nth-child(2){
+  background-image: url("../../images/上传图片和视频n.png");
+}
+.createTitle>div:nth-child(3){
+  background-image: url("../../images/提交审核n.png");
+  width: 300px;
+}
+.box:nth-child(3) .createTitle>div:first-child{
+  margin-left: 0;
+  background-image: url("../../images/添加封面及相关信息n.png");
+}
+.box:nth-child(3) .createTitle>div:nth-child(2){
+  background-image: url("../../images/上传图片和视频n.png");
+}
+.box:nth-child(3) .createTitle>div:nth-child(3){
+  background-image: url("../../images/提交审核h.png");
+  width: 300px;
+}
+.box:nth-child(2) .createTitle>div:first-child{
+  margin-left: 0;
+  background-image: url("../../images/添加封面及相关信息n.png");
+}
+.box:nth-child(2) .createTitle>div:nth-child(2){
+  background-image: url("../../images/上传图片和视频h.png");
+}
+.box:nth-child(2) .createTitle>div:nth-child(3){
+  background-image: url("../../images/提交审核n.png");
+  width: 300px;
+}
+.box1Content{
+  width: 684px;
+  margin: auto;
+  height: 800px;
+  /*background-color: #eeeeee;*/
+}
+.box1Content>p{
+  color: #333333;
+  font-size: 16px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.box1Content>p:first-letter{
+  margin-left: 16px;
+}
+.box1Content>p>span{
+  color: #999999;
+  font-size: 14px;
+}
+.box1Content>p:before{
+  content: '';
+  width: 4px;
+  height: 24px;
+  background-color: #333333;
+  position: absolute;
+}
+.avatar-uploader,
+.avatar-uploader-trigger,.avatar{
+  width: 300px;
+  height: 160px;
+}
+/*.avatar{*/
+/*width:200px;*/
+/*height:auto;*/
+/*position: absolute;*/
+/*margin-top: -100px;*/
+/*margin-left: -25%;*/
+/*top:50%;*/
+/*left: 50%;*/
+/*}*/
+.avatar-uploader {
+  display: block;
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.avatar-uploader-trigger {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 28px;
+  color: #999;
+}
+.ant-input {
+  height: 48px;
+  font-size: 16px;
+  color: #666666;
+  padding-left: 24px;
+}
+.ant-upload-list{
+  position: absolute;
+  margin-left: 350px;
+  margin-top: -160px;
+  max-height: 150px;
+  overflow: auto;
+  z-index: 1;
+  width: 300px;
+  height: 160px;
+}

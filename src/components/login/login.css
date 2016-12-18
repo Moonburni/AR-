@@ -1,0 +1,25 @@
+.login{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-image: url("../../images/登录bg.png");
+  background-size: cover;
+  background-position:center;
+  background-repeat: no-repeat;
+}
+.loginBox{
+  width: 480px;
+  height: 432px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -144px;
+  margin-left: -240px;
+  background-image: url("../../images/扫码.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 40px;
+}
