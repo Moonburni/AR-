@@ -19,9 +19,10 @@ export default class Login extends React.Component{
         login(values).then(({jsonResult})=>{
           // console.log(jsonResult);
           if(jsonResult.msg === "登录成功"){
-            // console.log(jsonResult);
+            console.log(jsonResult);
             cookie.set('token',jsonResult.data.token);
             cookie.set('qiNiuToken',jsonResult.data.qiuNiuToken);
+            cookie.set('userName',jsonResult.data.admin.adminName);
             hashHistory.push('/app')
           }else{
             message.error('登录失败，'+jsonResult.msg)

@@ -78,7 +78,7 @@ export default class StudioDetail extends React.Component {
               <span>浏览次数</span>
               <div id="browseCount">{this.state.data.browseCount}</div>
               <span>资源大小</span>
-              <div id="resourseSize">{this.state.data.resourseSize}</div>
+              <div id="resourceSize">{this.state.data.resourceSize}</div>
               <span>影集描述</span>
               <div id="description " style={{height: '120px'}}>{this.state.data.description}</div>
               <span>联系电话</span>

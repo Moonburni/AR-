@@ -15,12 +15,28 @@ export default class StudioList extends React.Component {
   };
 
   componentDidMount = () => {
-    document.body.scrollTop=document.body.scrollHeight;
+    document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
         document.onscroll =()=> {
-          if (
+            if(this.state.scrollNum === 1){
+                getData(this.state.scrollNum)
+                    .then(({jsonResult})=>{
+                        // console.log(jsonResult);
+                        this.setState({
+                            data: this.state.data.concat(jsonResult.data.list)
+                        });
+                        if (jsonResult.data.isLastPage === true) {
+                            this.setState({
+                                display: 1,
+                                loading:0
+                            });
+                        }
+                    });
+                this.state.scrollNum = this.state.scrollNum + 1;
+            }
+         else if (
             this.state.display === 0 &&
             document.body.scrollTop + document.body.clientHeight >= document.body.scrollHeight &&
-            location.hash.indexOf('app') != -1)
+            location.hash.indexOf('app') != -1 && this.state.scrollNum != 1)
           {
             // console.log(this.state.scrollNum);
             getData(this.state.scrollNum)

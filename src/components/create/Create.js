@@ -22,9 +22,9 @@ export default class Create extends React.Component {
 
   handleChange = (info) => {
     if (info.file.status === 'done') {
-      this.getBase64(info.file.originFileObj, imageUrl => this.setState({imageUrl}));
       this.setState({
-        coverImageUrl: qiNiuDomain + '/' + info.file.response.key
+        coverImageUrl: qiNiuDomain + '/' + info.file.response.key,
+        imageUrl:qiNiuDomain + '/' + info.file.response.key
       })
     }
   };
@@ -226,7 +226,7 @@ export default class Create extends React.Component {
                   >
                     {
                       imageUrl ?
-                        <img src={imageUrl} role="presentation" className="avatar"/> :
+                        <img src={`${imageUrl}?imageView2/1/w/300/h/160`} role="presentation" className="avatar"/> :
                         <Icon type="plus" className="avatar-uploader-trigger"/>
                     }
                   </Upload>
