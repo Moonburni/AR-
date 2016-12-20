@@ -18,7 +18,7 @@ export default class StudioDetail extends React.Component {
   componentWillMount() {
     getSingleData(this.props.params.id)
       .then(({jsonResult}) => {
-        // console.log(jsonResult);
+        // console.log(jsonResult.data);
         this.setState({
           data: jsonResult.data
         });
@@ -78,7 +78,7 @@ export default class StudioDetail extends React.Component {
               <span>浏览次数</span>
               <div id="browseCount">{this.state.data.browseCount}</div>
               <span>资源大小</span>
-              <div id="resourceSize">{this.state.data.resourceSize}</div>
+              <div id="resourceSize">{this.state.data.resourceSize}Mb</div>
               <span>影集描述</span>
               <div id="description " style={{height: '120px'}}>{this.state.data.description}</div>
               <span>联系电话</span>

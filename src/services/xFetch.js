@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import cookie from 'js-cookie';
-import {host} from "../../config"
+import {host,qiNiuHost} from "../../config"
 
 const errorMessages = (res) => `${res.status} ${res.statusText}`;
 
@@ -30,7 +30,7 @@ function errorMessageParse(res) {
   return res;
 }
 
-function xFetch(url, options) {
+export async function xFetch(url, options) {
   const opts = { ...options };
   opts.headers = {
     ...opts.headers,
@@ -45,5 +45,3 @@ function xFetch(url, options) {
     .then(jsonParse)
     .then(errorMessageParse);
 }
-
-export default xFetch;

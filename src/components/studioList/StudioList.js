@@ -16,6 +16,7 @@ export default class StudioList extends React.Component {
 
   componentDidMount = () => {
     document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
+      this.state.scrollNum = 1;
         document.onscroll =()=> {
             if(this.state.scrollNum === 1){
                 getData(this.state.scrollNum)

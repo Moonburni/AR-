@@ -26,26 +26,30 @@ export default class Create extends React.Component {
         coverImageUrl: qiNiuDomain + '/' + info.file.response.key,
         imageUrl:qiNiuDomain + '/' + info.file.response.key
       })
+    }else if(info.file.status === 'error'){
+        message.error('该文件名已存在，请重命名文件',3)
     }
   };
 
   handleChangeOther = (info) => {
     if (info.file.status === 'done') {
       this.getBase64(info.file.originFileObj, imageUrl1 => this.setState({imageUrl1}));
-      console.log(info);
+      // console.log(info);
       this.state.lastList = info.fileList.concat(this.state.fileList);
       if(info.file.type === 'video/mp4'){
         console.log(this.state.fileWeight);
         this.state.fileWeight = parseFloat(this.state.fileWeight) + parseFloat(info.file.size / 1024 /1024);
         console.log(this.state.fileWeight);
       }
+    }else if(info.file.status === 'error'){
+        message.error('该文件名已存在，请重命名文件',3)
     }
   };
 
   getBase64 = (img, callback)=> {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
+    reader.readAsDataURL(img)
   };
 
   beforeUpload = (file)=> {
@@ -58,13 +62,22 @@ export default class Create extends React.Component {
 
 
   beforeUploadOther = (file)=> {
-    const isLt200K = ()=> {
-      if (file.type.indexOf('image/') === -1 && file.size / 1024 / 100 < 2) {
+    const isLt20MB = ()=> {
+      if (file.type.indexOf('image/') === -1 && file.size / 1024 / 1024 > 20) {
         return false
       } else {
         return true
       }
     };
+
+    const isLt2MB = ()=> {
+      if (file.type.indexOf('video/mp4') === -1 && file.size / 1024 / 1024 > 2) {
+        return false
+      } else {
+        return true
+      }
+    };
+
     const isType = ()=> {
       if (file.type.indexOf('image/') === -1 && file.type.indexOf('video/mp4') === -1) {
         return false
@@ -75,10 +88,14 @@ export default class Create extends React.Component {
     if (!isType()) {
       this.openNotificationWithIcon('error', '只能上传图片或者Mp4格式的视频');
     }
-    if (!isLt200K()) {
+    if (!isLt2MB()) {
       this.openNotificationWithIcon('error', '图片必须小于200k!');
     }
-    return isType() && isLt200K();
+
+    if (!isLt20MB()) {
+      this.openNotificationWithIcon('error', '视频必须小于20MB!');
+    }
+    return isType() && isLt2MB() && isLt20MB();
   };
 
   openNotificationWithIcon = (type, text) => (
@@ -88,21 +105,36 @@ export default class Create extends React.Component {
     })
   );
 
+  removeFile =(file)=>{
+      if(file.type === 'video/mp4'){
+          // console.log(this.state.fileWeight);
+          this.state.fileWeight = parseFloat(this.state.fileWeight) - parseFloat(file.size / 1024 /1024);
+          // console.log(this.state.fileWeight);
+      }
+  };
+
   unique =(array)=>
   {
-    var n = [];
-    for(var i = 0; i < array.length; i++)
-    {
-      if (n.indexOf(array[i].imageUrl) == -1) n.push(array[i]);
-    }
-    return n;
+      if(array[0].name != undefined){
+          let n = [];
+          for(let i = 0; i < array.length; i++)
+          {
+              if (  n.some(item => item.name.indexOf(array[i].name) != -1)=== false) n.push(array[i]);
+          }
+          return n;
+      }else{
+          let n = [];
+          for(let i = 0; i < array.length; i++)
+          {
+              if ( n.some(item => item.imageUrl.indexOf(array[i].imageUrl) != -1)=== false) n.push(array[i]);
+          }
+          return n;
+      }
   };
 
   render = () => {
-
     const imageUrl = this.state.imageUrl;
     const imageUrl1 = this.state.imageUrl1;
-
     const move = () => {
       let data = {
         address: document.getElementById('address').value,
@@ -110,8 +142,9 @@ export default class Create extends React.Component {
         author: document.getElementById('author').value,
         coverImageUrl: this.state.coverImageUrl,
         description: document.getElementById('description').value,
+        contactName:document.getElementById('contactName').value
       };
-      if (data.address && data.albumName && data.author && data.coverImageUrl && data.description != '') {
+      if (data.contactName && data.address && data.albumName && data.author && data.coverImageUrl && data.description != '') {
         this.state.data = data;
         document.getElementById('createContent').className = 'createContent move';
         document.documentElement.scrollTop = document.body.scrollTop = 0;
@@ -120,12 +153,13 @@ export default class Create extends React.Component {
       }
     };
     const moveOther = () => {
-      this.state.fileList = this.state.lastList;
-      let img = this.state.lastList.filter((item, index)=> {
-        return (item.type.indexOf('image/') != -1)
+        // console.log(this.state.lastList);
+      this.state.fileList = this.unique(this.state.lastList);
+      let img = this.state.fileList.filter((item, index)=> {
+        return (item.type.indexOf('image/') != -1 && item.status === "done")
       });
-      let video = this.state.lastList.filter((item, index)=> {
-        return (item.type.indexOf('video/mp4') != -1)
+      let video = this.state.fileList.filter((item, index)=> {
+        return (item.type.indexOf('video/mp4') != -1 && item.status === "done")
       });
       let data = [];
       let lost = [];
@@ -137,7 +171,7 @@ export default class Create extends React.Component {
           data.push(
             {
               imageUrl: qiNiuDomain + '/' + item.response.key,
-              videoUrl: qiNiuDomain + '/' + name + '.mp4'
+              videoUrl: qiNiuDomain + '/photo/' + name + '.mp4'
             }
           )
         }
@@ -166,11 +200,12 @@ export default class Create extends React.Component {
             coverImageUrl: this.state.coverImageUrl,
             description: document.getElementById('description').value,
             photoList:this.unique(data),
-            resourceSize:this.state.fileWeight.toFixed(2)
+            resourceSize:this.state.fileWeight.toFixed(2),
+            contactName:document.getElementById('contactName').value
           };
-          console.log(upData);
+          // console.log(upData);
           postData(upData).then(({jsonResult})=>{
-            console.log(jsonResult);
+            // console.log(jsonResult);
             if(jsonResult.success === true){
               document.getElementById('createContent').className = 'createContent move moveOther';
               document.documentElement.scrollTop = document.body.scrollTop = 0
@@ -262,6 +297,7 @@ export default class Create extends React.Component {
                     onChange={this.handleChangeOther}
                     data={headersBuilderOther}
                     multiple={true}
+                    onRemove={this.removeFile}
                   >
                     {
                       imageUrl1 ?

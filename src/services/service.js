@@ -1,7 +1,11 @@
-import xFetch from './xFetch';
+import {xFetch} from './xFetch';
 
 export async function getData(data) {
   return xFetch('/api/album?pageNum='+data+'&pageSize=8');
+}
+
+export async function getQiNiuData(url) {
+    return xFetch('/api/qiNiuFileInfo?key=photo/'+url);
 }
 
 export async function login(user) {
