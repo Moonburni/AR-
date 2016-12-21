@@ -6,10 +6,10 @@
 }
 .detailContent{
   width:1000px;
-  height: 654px;
+  height: 514px;
   margin:auto;
   background-color: white;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 .detailContent .btn{
   float: left;
@@ -25,11 +25,9 @@
 .detailContent .imgContent{
   width: 348px;
   height: 470px;
-  float: left;
   position: absolute;
-  right: 0;
-  background-color: #fafafa;
-  padding-top: 44px;
+  right: 10px;
+  background-color:transparent;
 }
 .imgContent img{
   width: 100%;
@@ -37,24 +35,31 @@
 }
 .textContent>div{
   width: 428px;
-  height: 56px;
-  margin-left: 152px;
+  height: 46px;
+  margin-left: 132px;
   border:solid 1px #fafafa;
   border-radius: 0;
   border-top: transparent;
-  line-height: 56px;
-  font-size: 16px;
+  line-height: 46px;
+  font-size: 12px;
   padding-left: 12px;
 }
 .textContent>span{
   position: absolute;
-  width: 152px;
-  height: 32px;
-  border-radius: 16px 0 0 16px;
+  width: 132px;
+  height: 28px;
+  border-radius: 14px 0 0 14px;
   background-color: #cccccc;
-  margin-top: 12px;
-  font-size: 16px;
+  margin-top: 8px;
+  font-size: 14px;
   text-align: center;
-  line-height: 32px;
+  line-height: 28px;
   color: white;
+}
+.detail .btn{
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 20px;
+  font-size: 16px;
 }

@@ -1,12 +1,11 @@
 import React from 'react'
 import {Breadcrumb, Upload, Icon, message, Input, notification} from 'antd'
 import {RouteHandler, hashHistory, Link} from "react-router"
-import './change.css'
 import {qiNiu, qiNiuDomain, qiNiuBucket} from '../../../config'
 import {changeData, getSingleData, getQiNiuData} from '../../services/service'
 import cookie from 'js-cookie'
 
-
+let init = 0;
 export default class Change extends React.Component {
 
 
@@ -92,7 +91,7 @@ export default class Change extends React.Component {
             this.getBase64(info.file.originFileObj, imageUrl1 => this.setState({imageUrl1}));
             // console.log(info);
             this.state.lastList = info.fileList.concat(this.state.fileList);
-            console.log(this.state.lastList);
+            // console.log(this.state.lastList);
             if (info.file.type === 'video/mp4') {
                 // console.log(this.state.fileWeight);
                 this.state.fileWeight = parseFloat(this.state.fileWeight) + parseFloat(info.file.size / 1024 / 1024);
@@ -164,7 +163,11 @@ export default class Change extends React.Component {
     );
 
     removeFile = (file)=> {
-        console.log()
+        if(file.type === 'video/mp4'){
+            // console.log(this.state.fileWeight);
+            this.state.fileWeight = parseFloat(this.state.fileWeight) - parseFloat(file.size / 1024 /1024);
+            // console.log(this.state.fileWeight);
+        }
     };
 
     unique = (array)=> {
@@ -207,17 +210,18 @@ export default class Change extends React.Component {
             }
         };
         const moveOther = () => {
+            // console.log(this.state.lastList);
             if(this.state.lastList.length > 0){
                 this.state.fileList = this.unique(this.state.lastList);
-                console.log(this.state.fileList);
+                // console.log(this.state.fileList);
                 let img = this.state.fileList.filter((item, index)=> {
                     return (item.type.indexOf('image/') != -1 && item.status === "done")
                 });
                 let video = this.state.fileList.filter((item, index)=> {
                     return (item.type.indexOf('video/mp4') != -1 && item.status === "done")
                 });
-                console.log(img);
-                console.log(video);
+                // console.log(img);
+                // console.log(video);
                 let data = [];
                 let lost = [];
                 img.map((item, index)=> {
@@ -242,16 +246,18 @@ export default class Change extends React.Component {
                 // console.log(data);
                 // console.log(lost);
                 if (lost.length > 0) {
-                    console.log(lost);
+                    // console.log(lost);
                     let lostName = '';
                     lost.forEach((item)=> {
                         lostName += ('' + item + '')
                     });
-                    console.log(lostName);
+                    // console.log(lostName);
                     message.error('请提交' + lostName + '的对应文件', 3);
                     lost = [];
                 } else if (video.length > img.length) {
                     message.error('请提交与视频的对应的图片', 3);
+                }else if(data.length === 0){
+                    message.error('视频和图片不能为空', 3);
                 }
                 else {
                     if (this.state.fileList.length === 0) {
@@ -266,14 +272,14 @@ export default class Change extends React.Component {
                             contactName: document.getElementById('contactName').value || this.state.data.contactName,
                             resourceSize: this.state.fileWeight.toFixed(2)
                         };
-                        console.log(upData);
-                        // changeData(upData).then(({jsonResult})=> {
-                        //     console.log(jsonResult);
-                        //     if (jsonResult.success === true) {
-                        //         document.getElementById('createContent').className = 'createContent move moveOther';
-                        //         document.documentElement.scrollTop = document.body.scrollTop = 0
-                        //     }
-                        // })
+                        // console.log(upData);
+                        changeData(upData).then(({jsonResult})=> {
+                            // console.log(jsonResult);
+                            if (jsonResult.success === true) {
+                                document.getElementById('createContent').className = 'createContent move moveOther';
+                                document.documentElement.scrollTop = document.body.scrollTop = 0
+                            }
+                        })
                     } else {
                         let upData = {
                             albumId: this.state.data.albumId,
@@ -282,17 +288,17 @@ export default class Change extends React.Component {
                             author: document.getElementById('author').value || this.state.data.author,
                             coverImageUrl: this.state.coverImageUrl,
                             description: document.getElementById('description').value || this.state.data.description,
-                            photoList: this.unique(data.concat(this.state.data.photoList)),
+                            photoList: data,
                             resourceSize: this.state.fileWeight.toFixed(2)
                         };
-                        console.log(upData);
-                        // changeData(upData).then(({jsonResult})=> {
-                        //     // console.log(jsonResult);
-                        //     if (jsonResult.success === true) {
-                        //         document.getElementById('createContent').className = 'createContent move moveOther';
-                        //         document.documentElement.scrollTop = document.body.scrollTop = 0
-                        //     }
-                        // })
+                        // console.log(upData);
+                        changeData(upData).then(({jsonResult})=> {
+                            // console.log(jsonResult);
+                            if (jsonResult.success === true) {
+                                document.getElementById('createContent').className = 'createContent move moveOther';
+                                document.documentElement.scrollTop = document.body.scrollTop = 0
+                            }
+                        })
                     }
                 }
             }else {
@@ -317,9 +323,10 @@ export default class Change extends React.Component {
 
         const upLoad = ()=> {
             let initList = this.state.initList;
-            console.log(initList);
-            console.log( this.state.fileList);
-            if (initList.length > 0) {
+            // console.log(initList);
+            // console.log( this.state.fileList);
+            if (initList.length > 0 || init === 1 ) {
+                init = 1;
                 return (
                     <Upload
                         className="avatar-uploader"
@@ -341,13 +348,12 @@ export default class Change extends React.Component {
                     </Upload>
                 )
             }
-
         };
 
         return (
             <div className="create">
                 <span style={{position: 'absolute', width: '4px', height: '24px', backgroundColor: '#333333'}}/>
-                <div style={{marginLeft: '16px', marginBottom: '32px'}}>
+                <div style={{marginLeft: '16px', marginBottom: '12px'}}>
                     <Breadcrumb separator=">">
                         <Breadcrumb.Item>影集管理</Breadcrumb.Item>
                         <Breadcrumb.Item><Link to="/app">影集列表</Link></Breadcrumb.Item>
@@ -365,8 +371,8 @@ export default class Change extends React.Component {
                                 <div/>
                             </div>
                             <div className="box1Content">
-                                <p>上传封面<span>（图片建议比例 8:15）</span></p>
-                                <div style={{width: '300px', height: '160px', marginTop: '24px'}}>
+                                <p style={{width:'100%'}}>上传封面<span>（图片建议比例 8:15）</span></p>
+                                <div style={{width: '300px', height: '160px', paddingTop: '18px',clear:'both',marginBottom:'24px'}}>
                                     <Upload
                                         className="avatar-uploader"
                                         name="file"
@@ -405,8 +411,8 @@ export default class Change extends React.Component {
                                 <div/>
                             </div>
                             <div className="box1Content">
-                                <p>批量上传资源<span>（图片建议比例 15:8）</span></p>
-                                <div style={{width: '300px', height: '160px', marginTop: '24px'}}>
+                                <p style={{width:'100%'}}>批量上传资源<span>（图片建议比例 15:8）</span></p>
+                                <div style={{width: '300px', height: '160px', paddingTop: '18px',clear:'both',marginBottom:'24px'}}>
                                     {upLoad()}
                                 </div>
                                 <span style={{
@@ -431,8 +437,8 @@ export default class Change extends React.Component {
                                 <div/>
                             </div>
                             <div className="box1Content" style={{marginLeft: '350px'}}>
-                                <p>影集更新成功</p>
-                                <div style={{width: '300px', height: '160px', marginTop: '24px'}}>
+                                <p style={{width:'100%'}}>影集更新成功</p>
+                                <div style={{width: '300px', height: '160px', marginTop: '24px',clear:'both'}}>
 
                                 </div>
                                 <div className="btn" style={{marginLeft: '76px'}}><Link to="/app">返回影集列表</Link></div>

@@ -37,9 +37,9 @@ export default class Create extends React.Component {
       // console.log(info);
       this.state.lastList = info.fileList.concat(this.state.fileList);
       if(info.file.type === 'video/mp4'){
-        console.log(this.state.fileWeight);
+        // console.log(this.state.fileWeight);
         this.state.fileWeight = parseFloat(this.state.fileWeight) + parseFloat(info.file.size / 1024 /1024);
-        console.log(this.state.fileWeight);
+        // console.log(this.state.fileWeight);
       }
     }else if(info.file.status === 'error'){
         message.error('该文件名已存在，请重命名文件',3)
@@ -232,7 +232,7 @@ export default class Create extends React.Component {
     return (
       <div className="create">
         <span style={{position: 'absolute', width: '4px', height: '24px', backgroundColor: '#333333'}}/>
-        <div style={{marginLeft: '16px', marginBottom: '32px'}}>
+        <div style={{marginLeft: '16px', marginBottom: '12px'}}>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>影集管理</Breadcrumb.Item>
             <Breadcrumb.Item><Link to="/app">影集列表</Link></Breadcrumb.Item>
@@ -248,8 +248,8 @@ export default class Create extends React.Component {
                 <div/>
               </div>
               <div className="box1Content">
-                <p>上传封面<span>（图片建议比例 8:15）</span></p>
-                <div style={{width: '300px', height: '160px', marginTop: '24px'}}>
+                <p style={{width:'100%'}}>上传封面<span>（图片建议比例 8:15）</span></p>
+                <div style={{width: '300px', height: '160px', paddingTop: '18px',clear:'both',marginBottom:'24px'}}>
                   <Upload
                     className="avatar-uploader"
                     name="file"
@@ -286,8 +286,8 @@ export default class Create extends React.Component {
                 <div/>
               </div>
               <div className="box1Content">
-                <p>批量上传资源<span>（图片建议比例 15:8）</span></p>
-                <div style={{width: '300px', height: '160px', marginTop: '24px'}}>
+                <p style={{width:'100%'}}>批量上传资源<span>（图片建议比例 15:8）</span></p>
+                <div style={{width: '300px', height: '160px', paddingTop: '18px',clear:'both',marginBottom:'24px'}}>
                   <Upload
                     className="avatar-uploader"
                     name="file"
@@ -327,8 +327,8 @@ export default class Create extends React.Component {
                 <div/>
               </div>
               <div className="box1Content" style={{marginLeft: '350px'}}>
-                <p>内容已提交，请等待审核</p>
-                <div style={{width: '300px', height: '160px', marginTop: '24px'}}>
+                <p style={{width:'100%'}}>内容已提交，请等待审核</p>
+                <div style={{width: '300px', height: '160px', marginTop: '24px',clear:'both'}}>
 
                 </div>
                 <div className="btn" style={{marginLeft: '76px'}}><Link to="/app">返回影集列表</Link></div>

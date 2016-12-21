@@ -11,14 +11,16 @@ export default class StudioDetail extends React.Component {
 
   state = {
     data: {
-      photoList: []
+      photoList: [{
+          imageUrl:''
+      }]
     },
   };
 
   componentWillMount() {
     getSingleData(this.props.params.id)
       .then(({jsonResult}) => {
-        // console.log(jsonResult.data);
+        console.log(jsonResult.data);
         this.setState({
           data: jsonResult.data
         });
@@ -56,7 +58,7 @@ export default class StudioDetail extends React.Component {
     return (
       <div className="detail">
         <span style={{position: 'absolute', width: '4px', height: '24px', backgroundColor: '#333333'}}/>
-        <div style={{marginLeft: '16px', marginBottom: '32px'}}>
+        <div style={{marginLeft: '16px', marginBottom: '12px'}}>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>影集管理</Breadcrumb.Item>
             <Breadcrumb.Item><Link to="/app">影集列表</Link></Breadcrumb.Item>
@@ -66,7 +68,7 @@ export default class StudioDetail extends React.Component {
         <div className="detailContent">
           <div className="btn" onClick={change}>修 改</div>
           <div className="btn" onClick={del}>删 除</div>
-          <div style={{width: '952px', margin: 'auto', height: '514px', marginTop: '80px', position: 'relative'}}>
+          <div style={{width: '952px', margin: 'auto', height: '514px', marginTop: '60px', position: 'relative'}}>
             <div className="textContent">
               <span>影集名称</span>
               <div id="albumName" style={{borderTop: 'solid 1px #fafafa'}}>{this.state.data.albumName}</div>
@@ -80,7 +82,7 @@ export default class StudioDetail extends React.Component {
               <span>资源大小</span>
               <div id="resourceSize">{this.state.data.resourceSize}Mb</div>
               <span>影集描述</span>
-              <div id="description " style={{height: '120px'}}>{this.state.data.description}</div>
+              <div id="description " style={{height: '80px'}}>{this.state.data.description}</div>
               <span>联系电话</span>
               <div id="contactName">{this.state.data.contactName}</div>
               <span>联系地址</span>
@@ -88,19 +90,10 @@ export default class StudioDetail extends React.Component {
             </div>
             <div className="imgContent">
               <Carousel autoplay>
-                <div key='999' style={{
-                  width: '300px',
-                  margin: "auto",
-                  fontSize: '38px',
-                  textAlign: 'center',
-                  paddingTop: '30px',
-                  lineHeight:'48px'
-                }}>{this.state.data.albumName}
-                </div>
                 {
                   this.state.data.photoList.map((item, index)=> {
                     return (
-                      <div key={index}><img src={`${item.imageUrl}?imageView2/1/w/348/h/400`}/></div>
+                      <div key={index}><img src={`${item.imageUrl}?imageView2/1/w/348/h/348`}/></div>
                     )
                   })}
               </Carousel>
