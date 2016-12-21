@@ -6,7 +6,7 @@
 }
 .createBox{
   width: 1000px;
-  height: 1008px;
+  height: 820px;
   margin: auto;
   overflow: hidden;
   position: relative;
@@ -29,7 +29,7 @@
   height: 450px;
 }
 .createContent .box:first-child{
-  height: 1008px;
+  height: 800px;
 }
 .move{
   left: -1000px;
@@ -86,14 +86,14 @@
 .box1Content{
   width: 684px;
   margin: auto;
-  height: 800px;
-  /*background-color: #eeeeee;*/
+  height: 620px;
 }
 .box1Content>p{
   color: #333333;
   font-size: 16px;
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: 30px;
+  width: 100px;
+  float: left;
 }
 .box1Content>p:first-letter{
   margin-left: 16px;
@@ -135,11 +135,14 @@
   font-size: 28px;
   color: #999;
 }
-.ant-input {
+.create .ant-input {
   height: 48px;
   font-size: 16px;
   color: #666666;
   padding-left: 24px;
+  width: 500px;
+  float: left;
+  margin-top: 20px;
 }
 .ant-upload-list{
   position: absolute;
