@@ -120,7 +120,7 @@ export default class Change extends React.Component {
 
     beforeUploadOther = (file)=> {
         const isLt20MB = ()=> {
-            if (file.type.indexOf('image/') === -1 && file.size / 1024 / 1024 > 20) {
+            if (file.type.indexOf('image/') === -1 && file.size / 1024 / 1024 > 100) {
                 return false
             } else {
                 return true
@@ -146,11 +146,11 @@ export default class Change extends React.Component {
             this.openNotificationWithIcon('error', '只能上传图片或者Mp4格式的视频');
         }
         if (!isLt2MB()) {
-            this.openNotificationWithIcon('error', '图片必须小于200k!');
+            this.openNotificationWithIcon('error', '图片必须小于2M!');
         }
 
         if (!isLt20MB()) {
-            this.openNotificationWithIcon('error', '视频必须小于20MB!');
+            this.openNotificationWithIcon('error', '视频必须小于100MB!');
         }
         return isType() && isLt2MB() && isLt20MB();
     };
@@ -450,4 +450,3 @@ export default class Change extends React.Component {
         )
     }
 }
-
