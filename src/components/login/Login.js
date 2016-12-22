@@ -23,6 +23,7 @@ export default class Login extends React.Component{
             cookie.set('token',jsonResult.data.token);
             cookie.set('qiNiuToken',jsonResult.data.qiuNiuToken);
             cookie.set('userName',jsonResult.data.admin.adminName);
+            cookie.set('vToken',jsonResult.data.admin.adminName);
             hashHistory.push('/app')
           }else{
             message.error('登录失败，'+jsonResult.msg)

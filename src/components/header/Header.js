@@ -8,7 +8,8 @@ const Header = () => {
   return (
     <header>
       <div className="headerContent">
-        <p><span/><Link to="/app" style={{color:'white'}}>影集管理</Link></p>
+        <p><span/><Link to="/app" style={{color:'white'}}>云图</Link></p>
+        <p><Link to="/StudioListOther" style={{color:'white'}}>影集</Link></p>
         <span>{cookie.get('userName')}</span>
         <Link to="/">
         <Icon type="poweroff" style={{

@@ -45,3 +45,20 @@ export async function xFetch(url, options) {
     .then(jsonParse)
     .then(errorMessageParse);
 }
+
+export async function vFetch(url, options) {
+  const opts = { ...options };
+  opts.headers = {
+    ...opts.headers,
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    token: cookie.get('vToken')
+    ,
+  };
+
+  return fetch(host+url, opts)
+      .then(check401)
+      .then(check404)
+      .then(jsonParse)
+      .then(errorMessageParse);
+}

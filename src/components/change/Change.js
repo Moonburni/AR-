@@ -4,7 +4,7 @@ import {RouteHandler, hashHistory, Link} from "react-router"
 import {qiNiu, qiNiuDomain, qiNiuBucket} from '../../../config'
 import {changeData, getSingleData, getQiNiuData} from '../../services/service'
 import cookie from 'js-cookie'
-
+const InputGroup = Input.Group;
 let init = 0;
 export default class Change extends React.Component {
 
@@ -26,7 +26,8 @@ export default class Change extends React.Component {
         lastList: [],
         lastWeight: '',
         fileWeight: 0,
-        initList:[]
+        initList:[],
+        loading:false
     };
 
     componentWillMount = () => {
@@ -34,7 +35,7 @@ export default class Change extends React.Component {
         let dataSize = 0;
         getSingleData(this.props.params.id)
             .then(({jsonResult}) => {
-                // console.log(jsonResult.data);
+                console.log(jsonResult.data);
                 this.setState({
                     data: jsonResult.data,
                     coverImageUrl: jsonResult.data.coverImageUrl,
@@ -48,6 +49,7 @@ export default class Change extends React.Component {
 
                 Promise.all(stringList.map((item) => getQiNiuData(item)))
                     .then(jsonResults => {
+                        console.log(jsonResults);
                         let datas = jsonResults.map(({jsonResult}, index) => ({
                             name: stringList[index],
                             size: jsonResult.data.fsize,
@@ -328,7 +330,7 @@ export default class Change extends React.Component {
             if (initList.length > 0 || init === 1 ) {
                 init = 1;
                 return (
-                    <Upload
+                   <Upload
                         className="avatar-uploader"
                         name="file"
                         showUploadList={true}
@@ -355,11 +357,11 @@ export default class Change extends React.Component {
                 <span style={{position: 'absolute', width: '4px', height: '24px', backgroundColor: '#333333'}}/>
                 <div style={{marginLeft: '16px', marginBottom: '12px'}}>
                     <Breadcrumb separator=">">
-                        <Breadcrumb.Item>影集管理</Breadcrumb.Item>
-                        <Breadcrumb.Item><Link to="/app">影集列表</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item>云图管理</Breadcrumb.Item>
+                        <Breadcrumb.Item><Link to="/app">云图列表</Link></Breadcrumb.Item>
                         <Breadcrumb.Item><Link
-                            to={`/studioDetail/${this.props.params.id}`}>影集详情</Link></Breadcrumb.Item>
-                        <Breadcrumb.Item><Link to={`/change/${this.props.params.id}`}>修改影集</Link></Breadcrumb.Item>
+                            to={`/studioDetail/${this.props.params.id}`}>云图详情</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item><Link to={`/change/${this.props.params.id}`}>修改云图</Link></Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
                 <div className="createBox">
@@ -401,6 +403,21 @@ export default class Change extends React.Component {
                                 <Input placeholder={this.state.data.contactName} id="contactName"/>
                                 <p>联系地址</p>
                                 <Input placeholder={this.state.data.address} id="address"/>
+                                <p>链接1</p>
+                                <InputGroup>
+                                    <Input placeholder="链接名" className="input-small" id="input-small1"/>
+                                    <Input placeholder="链接地址(选填)" className="input-big" id="input-big1"/>
+                                </InputGroup>
+                                <p>链接2</p>
+                                <InputGroup>
+                                    <Input placeholder="链接名" className="input-small" id="input-small2"/>
+                                    <Input placeholder="链接地址(选填)" className="input-big" id="input-big2"/>
+                                </InputGroup>
+                                <p>链接3</p>
+                                <InputGroup>
+                                    <Input placeholder="链接名" className="input-small" id="input-small3"/>
+                                    <Input placeholder="链接地址(选填)" className="input-big" id="input-big3"/>
+                                </InputGroup>
                             </div>
                             <div className="btn" style={{marginLeft: 'calc(50% - 76px)'}} onClick={move}>下一步</div>
                         </div>
@@ -426,6 +443,7 @@ export default class Change extends React.Component {
                                     borderRadius: '5px 0 0 5px'
                                 }}/>
                                 <span>*请图片对应视频，并且名字相同</span>
+
                                 <div className="btn" onClick={moveOther} style={{marginLeft: 'calc(50% - 76px)'}}>下一步
                                 </div>
                             </div>

@@ -14,6 +14,9 @@ header .headerContent p{
   display: inline-block;
   padding-left: 160px;
 }
+header .headerContent p:nth-child(2){
+  padding-left: 80px;
+}
 header .headerContent p span{
   background-image: url("../../images/48.png");
   margin-left: -160px;
@@ -25,12 +28,12 @@ header .headerContent p span{
 header .headerContent p:after{
   content: '';
   position: absolute;
-  width: 120px;
+  width: 100px;
   height: 4px;
   border-radius: 2px;
   background-color: #ffcb00;
   margin-top: 68px;
-  margin-left: -100px;
+  margin-left: -70px;
 }
 .headerContent>img{
   right: 124px;

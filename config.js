@@ -13,6 +13,7 @@ export default {
     qiNiuDomain: 'http://oij99gfpp.bkt.clouddn.com',
     qiNiuHost: 'http://rs.qiniu.com',
     qiNiuBucket: 'yidu-album-test'
+
 }
 //本地
 // export default {

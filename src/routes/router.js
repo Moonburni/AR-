@@ -4,9 +4,13 @@ import cookie from 'js-cookie';
 import App from '../components/App';
 import Login from '../components/login/Login'
 import StudioList from '../components/studioList/StudioList'
+import StudioListOther from '../components/studioList/StudioListOther'
 import StudioDetail from '../components/studioDetail/StudioDetail'
+import StudioDetailOther from '../components/studioDetail/StudioDetailOther'
 import Create from '../components/create/Create'
 import Change from '../components/change/Change'
+import CreateOther from '../components/create/CreateOther'
+import ChangeOther from '../components/change/ChangeOther'
 
 const Routes = () =>{
   return(
@@ -21,9 +25,13 @@ const Routes = () =>{
              }}>
         <IndexRoute component={StudioList}/>
         <Route path="/studioList" component={StudioList}/>
+          <Route path="/studioListOther" component={StudioListOther}/>
         <Route path="/studioDetail/:id" component={StudioDetail}/>
+          <Route path="/studioDetailOther/:id" component={StudioDetailOther}/>
         <Route path="/create" component={Create}/>
         <Route path="/change/:id" component={Change}/>
+          <Route path="/createOther" component={CreateOther}/>
+          <Route path="/changeOther/:id" component={ChangeOther}/>
       </Route>
     </Router>
   )

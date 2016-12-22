@@ -6,7 +6,7 @@
 }
 .createBox{
   width: 1000px;
-  height: 820px;
+  height: 1000px;
   margin: auto;
   overflow: hidden;
   position: relative;
@@ -29,7 +29,7 @@
   height: 450px;
 }
 .createContent .box:first-child{
-  height: 800px;
+  height: 1000px;
 }
 .move{
   left: -1000px;
@@ -86,7 +86,7 @@
 .box1Content{
   width: 684px;
   margin: auto;
-  height: 620px;
+  height: 820px;
 }
 .box1Content>p{
   color: #333333;
@@ -153,4 +153,15 @@
   z-index: 1;
   width: 300px;
   height: 160px;
+}
+.create .input-big{
+  width: 350px;
+}
+.create .input-small{
+  width: 100px;
+  margin-right: 50px;
+}
+.ant-input-group{
+  float: left;
+  width: 500px;
 }

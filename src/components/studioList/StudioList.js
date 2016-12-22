@@ -16,10 +16,10 @@ export default class StudioList extends React.Component {
     componentDidMount = () => {
         // document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
         let scrollNum = 1;
-        console.log(scrollNum);
+        // console.log(scrollNum);
         getData(scrollNum)
             .then(({jsonResult})=> {
-                console.log(jsonResult);
+                // console.log(jsonResult);
                 this.setState({
                     data: this.unique(this.state.data.concat(jsonResult.data.list))
                 });
@@ -36,11 +36,11 @@ export default class StudioList extends React.Component {
                 this.state.display === 0 &&
                 document.body.scrollTop + document.body.clientHeight >= document.body.scrollHeight &&
                 location.hash.indexOf('app') != -1) {
-                console.log(scrollNum);
-                console.log(this.state.display);
+                // console.log(scrollNum);
+                // console.log(this.state.display);
                 getData(scrollNum)
                     .then(({jsonResult})=> {
-                        console.log(jsonResult);
+                        // console.log(jsonResult);
                         this.setState({
                             data: this.unique(this.state.data.concat(jsonResult.data.list))
                         });
@@ -116,8 +116,8 @@ export default class StudioList extends React.Component {
                 <span style={{position: 'absolute', width: '4px', height: '24px', backgroundColor: '#333333'}}/>
                 <div style={{marginLeft: '16px', marginBottom: '12px'}}>
                     <Breadcrumb separator=">">
-                        <Breadcrumb.Item>影集管理</Breadcrumb.Item>
-                        <Breadcrumb.Item><Link to="/app">影集列表</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item>云图管理</Breadcrumb.Item>
+                        <Breadcrumb.Item><Link to="/app">云图列表</Link></Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
                 <div className="btn"><Link to="/create">创 建</Link></div>
