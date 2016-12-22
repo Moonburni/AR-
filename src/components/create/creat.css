@@ -165,3 +165,7 @@
   float: left;
   width: 500px;
 }
+.ant-input-group-addon{
+  height: 48px;
+  margin-top: 20px;
+}

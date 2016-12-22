@@ -2,7 +2,7 @@ import React from 'react'
 import {Breadcrumb, Upload, Icon, message, Input, notification} from 'antd'
 import {RouteHandler, hashHistory, Link} from "react-router"
 import {qiNiu, qiNiuDomain, qiNiuBucket} from '../../../config'
-import {changeData, getSingleData, getQiNiuData} from '../../services/service'
+import {changeDataImg, getSingleDataImg, getQiNiuData} from '../../services/service'
 import cookie from 'js-cookie'
 const InputGroup = Input.Group;
 let init = 0;
@@ -15,11 +15,25 @@ export default class Change extends React.Component {
         coverImageUrl: '',
         data: {
             address: '',
-            albumName: '',
+            companyName: '',
             author: '',
             coverImageUrl: '',
             description: '',
-            photoList: []
+            photoList: [],
+            linkList:[
+                {
+                    linkName:'',
+                    linkUrl:''
+                },
+                {
+                    linkName:'',
+                    linkUrl:''
+                },
+                {
+                    linkName:'',
+                    linkUrl:''
+                }
+            ]
         },
         fileList: [],
         photoList: [],
@@ -27,15 +41,15 @@ export default class Change extends React.Component {
         lastWeight: '',
         fileWeight: 0,
         initList:[],
-        loading:false
+        loading:false,
     };
 
     componentWillMount = () => {
         let stringList = [];
         let dataSize = 0;
-        getSingleData(this.props.params.id)
+        getSingleDataImg(this.props.params.id)
             .then(({jsonResult}) => {
-                console.log(jsonResult.data);
+                // console.log(jsonResult.data);
                 this.setState({
                     data: jsonResult.data,
                     coverImageUrl: jsonResult.data.coverImageUrl,
@@ -46,6 +60,7 @@ export default class Change extends React.Component {
                     stringList.push(item.imageUrl.substr(item.imageUrl.lastIndexOf('/') + 1, item.imageUrl.length));
                     stringList.push(item.videoUrl.substr(item.videoUrl.lastIndexOf('/') + 1, item.videoUrl.length));
                 });
+                console.log(stringList);
 
                 Promise.all(stringList.map((item) => getQiNiuData(item)))
                     .then(jsonResults => {
@@ -196,14 +211,27 @@ export default class Change extends React.Component {
         const move = () => {
             let data = {
                 address: document.getElementById('address').value || this.state.data.address,
-                albumName: document.getElementById('albumName').value || this.state.data.albumName,
-                author: document.getElementById('author').value || this.state.data.author,
+                companyName: document.getElementById('companyName').value || this.state.data.companyName,
                 coverImageUrl: this.state.coverImageUrl,
                 description: document.getElementById('description').value || this.state.data.description,
-                contactName: document.getElementById('contactName').value || this.state.data.contactName,
+                contactNum: document.getElementById('contactNum').value || this.state.data.contactNum,
+                linkList:[
+                    {
+                        linkName:document.getElementById('input-small1').value || this.state.data.linkList[0].linkName,
+                        linkUrl:document.getElementById('input-big1').value || this.state.data.linkList[0].linkUrl
+                    },
+                    {
+                        linkName:document.getElementById('input-small2').value || this.state.data.linkList[1].linkName,
+                        linkUrl:document.getElementById('input-big2').value || this.state.data.linkList[1].linkUrl
+                    },
+                    {
+                        linkName:document.getElementById('input-small3').value || this.state.data.linkList[2].linkName,
+                        linkUrl:document.getElementById('input-big3').value || this.state.data.linkList[2].linkUrl
+                    }
+                ]
             };
             // console.log(data);
-            if (data.contactName && data.address && data.albumName && data.author && data.coverImageUrl && data.description != '') {
+            if (data.contactNum && data.address && data.companyName &&  data.coverImageUrl && data.description != '') {
                 // console.log(this.state);
                 document.getElementById('createContent').className = 'createContent move';
                 document.documentElement.scrollTop = document.body.scrollTop = 0;
@@ -264,18 +292,31 @@ export default class Change extends React.Component {
                 else {
                     if (this.state.fileList.length === 0) {
                         let upData = {
-                            albumId: this.state.data.albumId,
+                            cloudImageId: this.state.data.cloudImageId,
                             address: document.getElementById('address').value || this.state.data.address,
-                            albumName: document.getElementById('albumName').value || this.state.data.albumName,
-                            author: document.getElementById('author').value || this.state.data.author,
+                            companyName: document.getElementById('companyName').value || this.state.data.companyName,
                             coverImageUrl: this.state.coverImageUrl,
                             description: document.getElementById('description').value || this.state.data.description,
                             photoList: this.state.data.photoList,
-                            contactName: document.getElementById('contactName').value || this.state.data.contactName,
-                            resourceSize: this.state.fileWeight.toFixed(2)
+                            contactNum: document.getElementById('contactNum').value || this.state.data.contactNum,
+                            resourceSize: this.state.fileWeight.toFixed(2),
+                            linkList:[
+                                {
+                                    linkName:document.getElementById('input-small1').value || this.state.data.linkList[0].linkName,
+                                    linkUrl:document.getElementById('input-big1').value || this.state.data.linkList[0].linkUrl
+                                },
+                                {
+                                    linkName:document.getElementById('input-small2').value || this.state.data.linkList[1].linkName,
+                                    linkUrl:document.getElementById('input-big2').value || this.state.data.linkList[1].linkUrl
+                                },
+                                {
+                                    linkName:document.getElementById('input-small3').value || this.state.data.linkList[2].linkName,
+                                    linkUrl:document.getElementById('input-big3').value || this.state.data.linkList[2].linkUrl
+                                }
+                            ]
                         };
                         // console.log(upData);
-                        changeData(upData).then(({jsonResult})=> {
+                        changeDataImg(upData).then(({jsonResult})=> {
                             // console.log(jsonResult);
                             if (jsonResult.success === true) {
                                 document.getElementById('createContent').className = 'createContent move moveOther';
@@ -284,17 +325,30 @@ export default class Change extends React.Component {
                         })
                     } else {
                         let upData = {
-                            albumId: this.state.data.albumId,
+                            cloudImageId: this.state.data.cloudImageId,
                             address: document.getElementById('address').value || this.state.data.address,
-                            albumName: document.getElementById('albumName').value || this.state.data.albumName,
-                            author: document.getElementById('author').value || this.state.data.author,
+                            companyName: document.getElementById('companyName').value || this.state.data.companyName,
                             coverImageUrl: this.state.coverImageUrl,
                             description: document.getElementById('description').value || this.state.data.description,
                             photoList: data,
-                            resourceSize: this.state.fileWeight.toFixed(2)
+                            resourceSize: this.state.fileWeight.toFixed(2),
+                            linkList:[
+                                {
+                                    linkName:document.getElementById('input-small1').value || this.state.data.linkList[0].linkName,
+                                    linkUrl:document.getElementById('input-big1').value || this.state.data.linkList[0].linkUrl
+                                },
+                                {
+                                    linkName:document.getElementById('input-small2').value || this.state.data.linkList[1].linkName,
+                                    linkUrl:document.getElementById('input-big2').value || this.state.data.linkList[1].linkUrl
+                                },
+                                {
+                                    linkName:document.getElementById('input-small3').value || this.state.data.linkList[2].linkName,
+                                    linkUrl:document.getElementById('input-big3').value || this.state.data.linkList[2].linkUrl
+                                }
+                            ]
                         };
                         // console.log(upData);
-                        changeData(upData).then(({jsonResult})=> {
+                        changeDataImg(upData).then(({jsonResult})=> {
                             // console.log(jsonResult);
                             if (jsonResult.success === true) {
                                 document.getElementById('createContent').className = 'createContent move moveOther';
@@ -392,31 +446,29 @@ export default class Change extends React.Component {
                                         }
                                     </Upload>
                                 </div>
-                                <p>影集名称</p>
-                                <Input placeholder={this.state.data.albumName} id="albumName"/>
-                                <p>作者</p>
-                                <Input placeholder={this.state.data.author} id="author"/>
-                                <p>影集描述</p>
+                                <p>公司名称</p>
+                                <Input placeholder={this.state.data.companyName} id="companyName"/>
+                                <p>公司描述</p>
                                 <Input type="textarea" rows={2} placeholder={this.state.data.description}
                                        id="description"/>
                                 <p>联系电话</p>
-                                <Input placeholder={this.state.data.contactName} id="contactName"/>
+                                <Input placeholder={this.state.data.contactNum} id="contactNum"/>
                                 <p>联系地址</p>
                                 <Input placeholder={this.state.data.address} id="address"/>
                                 <p>链接1</p>
                                 <InputGroup>
-                                    <Input placeholder="链接名" className="input-small" id="input-small1"/>
-                                    <Input placeholder="链接地址(选填)" className="input-big" id="input-big1"/>
+                                    <Input placeholder={this.state.data.linkList[0].linkName} className="input-small" id="input-small1"/>
+                                    <Input placeholder={this.state.data.linkList[0].linkUrl} className="input-big" id="input-big1"/>
                                 </InputGroup>
                                 <p>链接2</p>
                                 <InputGroup>
-                                    <Input placeholder="链接名" className="input-small" id="input-small2"/>
-                                    <Input placeholder="链接地址(选填)" className="input-big" id="input-big2"/>
+                                    <Input placeholder={this.state.data.linkList[1].linkName} className="input-small" id="input-small2"/>
+                                    <Input placeholder={this.state.data.linkList[1].linkUrl} className="input-big" id="input-big2"/>
                                 </InputGroup>
                                 <p>链接3</p>
                                 <InputGroup>
-                                    <Input placeholder="链接名" className="input-small" id="input-small3"/>
-                                    <Input placeholder="链接地址(选填)" className="input-big" id="input-big3"/>
+                                    <Input placeholder={this.state.data.linkList[2].linkName} className="input-small" id="input-small3"/>
+                                    <Input placeholder={this.state.data.linkList[2].linkUrl} className="input-big" id="input-big3"/>
                                 </InputGroup>
                             </div>
                             <div className="btn" style={{marginLeft: 'calc(50% - 76px)'}} onClick={move}>下一步</div>

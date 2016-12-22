@@ -1,11 +1,12 @@
 import React from 'react'
-import {Breadcrumb, Upload, Icon, message, Input, notification, Col} from 'antd';
+import {Breadcrumb, Upload, Icon, message, Input, notification, Select} from 'antd';
 import {RouteHandler, hashHistory, Link} from "react-router"
 import './creat.css'
 import {qiNiu, qiNiuDomain} from '../../../config'
-import {postData} from '../../services/service'
+import {postDataImg} from '../../services/service'
 import cookie from 'js-cookie';
 const InputGroup = Input.Group;
+const Option = Select.Option;
 
 export default class Create extends React.Component {
 
@@ -21,7 +22,7 @@ export default class Create extends React.Component {
         fileWeight: 0,
         loading: false
     };
-    
+
     beforeUploadOther = (file)=> {
         const isLt20MB = ()=> {
             if (file.type.indexOf('image/') === -1 && file.size / 1024 / 1024 > 100) {
@@ -135,12 +136,12 @@ export default class Create extends React.Component {
         const move = () => {
             let data = {
                 address: document.getElementById('address').value,
-                albumName: document.getElementById('albumName').value,
+                companyName: document.getElementById('companyName').value,
                 coverImageUrl: this.state.coverImageUrl,
                 description: document.getElementById('description').value,
-                contactName: document.getElementById('contactName').value
+                contactNum: document.getElementById('contactNum').value
             };
-            if (data.contactName && data.address && data.albumName  && data.coverImageUrl && data.description != '') {
+            if (data.contactNum && data.address && data.companyName  && data.coverImageUrl && data.description != '') {
                 this.state.data = data;
                 document.getElementById('createContent').className = 'createContent move';
                 document.documentElement.scrollTop = document.body.scrollTop = 0;
@@ -191,16 +192,29 @@ export default class Create extends React.Component {
                 } else {
                     let upData = {
                         address: document.getElementById('address').value,
-                        albumName: document.getElementById('albumName').value,
-                        author: document.getElementById('author').value,
+                        companyName: document.getElementById('companyName').value,
                         coverImageUrl: this.state.coverImageUrl,
                         description: document.getElementById('description').value,
                         photoList: this.unique(data),
                         resourceSize: this.state.fileWeight.toFixed(2),
-                        contactName: document.getElementById('contactName').value,
+                        contactNum: document.getElementById('contactNum').value,
+                        linkList:[
+                            {
+                                linkName:document.getElementById('input-small1').value,
+                                linkUrl:document.getElementById('input-big1').value
+                            },
+                            {
+                                linkName:document.getElementById('input-small2').value,
+                                linkUrl:document.getElementById('input-big2').value
+                            },
+                            {
+                                linkName:document.getElementById('input-small3').value,
+                                linkUrl:document.getElementById('input-big3').value
+                            }
+                        ]
                     };
                     // console.log(upData);
-                    postData(upData).then(({jsonResult})=> {
+                    postDataImg(upData).then(({jsonResult})=> {
                         // console.log(jsonResult);
                         if (jsonResult.success === true) {
                             document.getElementById('createContent').className = 'createContent move moveOther';
@@ -224,6 +238,13 @@ export default class Create extends React.Component {
                 key: 'photo/' + file.name
             });
         };
+
+        // const selectBefore = (
+        //     <Select defaultValue="Http://" style={{ width: 80 }}>
+        //         <Option value="Http://">Http://</Option>
+        //         <Option value="Https://">Https://</Option>
+        //     </Select>
+        // );
 
         return (
             <div className="create">
@@ -270,11 +291,11 @@ export default class Create extends React.Component {
                                     </Upload>
                                 </div>
                                 <p>公司名称</p>
-                                <Input placeholder="请输入公司名称" id="albumName"/>
+                                <Input placeholder="请输入公司名称" id="companyName"/>
                                 <p>公司介绍</p>
                                 <Input type="textarea" rows={2} placeholder="请输入公司介绍" id="description"/>
                                 <p>联系电话</p>
-                                <Input placeholder="请输入联系电话" id="contactName"/>
+                                <Input placeholder="请输入联系电话" id="contactNum"/>
                                 <p>联系地址</p>
                                 <Input placeholder="请输入联系地址" id="address"/>
                                 <p>链接1</p>

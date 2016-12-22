@@ -2,7 +2,7 @@ import React from 'react'
 import {Breadcrumb, BackTop} from 'antd';
 import {RouteHandler, hashHistory, Link} from "react-router"
 import './list.css'
-import {getData} from '../../services/service'
+import {getDataImg} from '../../services/service'
 
 
 export default class StudioList extends React.Component {
@@ -17,7 +17,7 @@ export default class StudioList extends React.Component {
         // document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
         let scrollNum = 1;
         // console.log(scrollNum);
-        getData(scrollNum)
+        getDataImg(scrollNum)
             .then(({jsonResult})=> {
                 // console.log(jsonResult);
                 this.setState({
@@ -38,7 +38,7 @@ export default class StudioList extends React.Component {
                 location.hash.indexOf('app') != -1) {
                 // console.log(scrollNum);
                 // console.log(this.state.display);
-                getData(scrollNum)
+                getDataImg(scrollNum)
                     .then(({jsonResult})=> {
                         // console.log(jsonResult);
                         this.setState({
@@ -59,7 +59,7 @@ export default class StudioList extends React.Component {
     unique = (array)=> {
         let n = [];
         for (let i = 0; i < array.length; i++) {
-            if (n.some(item => item.albumId.indexOf(array[i].albumId) != -1) === false) n.push(array[i]);
+            if (n.some(item => item.cloudImageId.indexOf(array[i].cloudImageId) != -1) === false) n.push(array[i]);
         }
         return n;
     };
@@ -79,7 +79,7 @@ export default class StudioList extends React.Component {
                 data.map((item, index)=> {
                     if (item.state === 1) {
                         return (
-                            <div key={index} onClick={detail(item.albumId)}>
+                            <div key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#3e9cdc', fontSize: '14px'}}>审核中</p>
@@ -88,7 +88,7 @@ export default class StudioList extends React.Component {
                     }
                     if (item.state === 2) {
                         return (
-                            <div key={index} onClick={detail(item.albumId)}>
+                            <div key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核未通过</p>
@@ -97,7 +97,7 @@ export default class StudioList extends React.Component {
                     }
                     if (item.state === 3) {
                         return (
-                            <div key={index} onClick={detail(item.albumId)}>
+                            <div key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#13a870', fontSize: '14px'}}>审核通过</p>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Breadcrumb, Input, Carousel, Modal, Button} from 'antd';
 import {RouteHandler, hashHistory, Link} from "react-router"
-import {getSingleData, delSingleData} from '../../services/service'
+import {getSingleDataImg, delSingleDataImg} from '../../services/service'
 import './studioDetail.css'
 
 const confirm = Modal.confirm;
@@ -13,12 +13,27 @@ export default class StudioDetail extends React.Component {
         data: {
             photoList: [{
                 imageUrl: ''
-            }]
+            }],
+            linkList:[
+                {
+                    linkName:'',
+                    linkUrl:''
+                },
+                {
+                    linkName:'',
+                    linkUrl:''
+                },
+                {
+                    linkName:'',
+                    linkUrl:''
+                }
+            ]
+
         },
     };
 
     componentWillMount() {
-        getSingleData(this.props.params.id)
+        getSingleDataImg(this.props.params.id)
             .then(({jsonResult}) => {
                 console.log(jsonResult.data);
                 this.setState({
@@ -39,7 +54,7 @@ export default class StudioDetail extends React.Component {
                 title: '是否删除此影集?',
                 content: '删除后将不可恢复',
                 onOk() {
-                    delSingleData(that)
+                    delSingleDataImg(that)
                         .then(({jsonResult})=> {
                             if (jsonResult.success) {
                                 hashHistory.push('/app')
@@ -77,8 +92,8 @@ export default class StudioDetail extends React.Component {
                     }}>
                         <div className="textContent">
                             <span>公司名称</span>
-                            <div id="albumName"
-                                 style={{borderTop: 'solid 1px #fafafa'}}>{this.state.data.albumName}</div>
+                            <div id="companyName "
+                                 style={{borderTop: 'solid 1px #fafafa'}}>{this.state.data.companyName}</div>
                             <span>创建日期</span>
                             <div
                                 id="createTime">{new Date(parseInt(this.state.data.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</div>
@@ -89,15 +104,15 @@ export default class StudioDetail extends React.Component {
                             <span>公司详情</span>
                             <div id="description " style={{height: '80px'}}>{this.state.data.description}</div>
                             <span>联系电话</span>
-                            <div id="contactName">{this.state.data.contactName}</div>
+                            <div id="contactNum">{this.state.data.contactNum}</div>
                             <span>联系地址</span>
                             <div id="address">{this.state.data.address}</div>
                             <span>链接1</span>
-                            <div id="contact1">{this.state.data.address}</div>
+                            <div id="contact1">{this.state.data.linkList[0].linkName}:<a href={`http://${this.state.data.linkList[0].linkUrl}`}>{this.state.data.linkList[0].linkUrl}</a></div>
                             <span>链接2</span>
-                            <div id="contact2">{this.state.data.address}</div>
+                            <div id="contact2">{this.state.data.linkList[1].linkName}:<a href={`http://${this.state.data.linkList[1].linkUrl}`}>{this.state.data.linkList[1].linkUrl}</a></div>
                             <span>链接3</span>
-                            <div id="contact3">{this.state.data.address}</div>
+                            <div id="contact3">{this.state.data.linkList[2].linkName}:<a href={`http://${this.state.data.linkList[2].linkUrl}`}>{this.state.data.linkList[2].linkUrl}</a></div>
                         </div>
                         <div className="imgContent">
                             <Carousel autoplay>
