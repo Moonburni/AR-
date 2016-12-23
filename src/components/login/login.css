@@ -10,16 +10,26 @@
   background-repeat: no-repeat;
 }
 .loginBox{
-  width: 480px;
-  height: 432px;
+  width: 384px;
+  height: 345px;
   position: absolute;
   left: 50%;
   top: 50%;
-  margin-top: -144px;
-  margin-left: -240px;
+  margin-top: -156px;
+  margin-left: -172px;
   background-image: url("../../images/扫码.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  padding: 40px;
+  padding: 32px;
+}
+.btn:hover{
+  background-color: #ffe065;
+}
+.login-form-button:hover{
+  background-color: #ffe065!important;
+  border-color:  #ffe065!important;
+}
+.btn{
+  cursor: pointer;
 }

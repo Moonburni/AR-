@@ -79,28 +79,31 @@ export default class StudioList extends React.Component {
                 data.map((item, index)=> {
                     if (item.state === 1) {
                         return (
-                            <div key={index} onClick={detail(item.cloudImageId)}>
+                            <div className="something" key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#3e9cdc', fontSize: '14px'}}>审核中</p>
+                                <div className="gray">{item.companyName}</div>
                             </div>
                         )
                     }
                     if (item.state === 2) {
                         return (
-                            <div key={index} onClick={detail(item.cloudImageId)}>
+                            <div className="something" key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核未通过</p>
+                                <div className="gray">{item.companyName}</div>
                             </div>
                         )
                     }
                     if (item.state === 3) {
                         return (
-                            <div key={index} onClick={detail(item.cloudImageId)}>
+                            <div className="something" key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#13a870', fontSize: '14px'}}>审核通过</p>
+
                             </div>
                         )
                     }
@@ -117,10 +120,10 @@ export default class StudioList extends React.Component {
                 <div style={{marginLeft: '16px', marginBottom: '12px'}}>
                     <Breadcrumb separator=">">
                         <Breadcrumb.Item>云图管理</Breadcrumb.Item>
-                        <Breadcrumb.Item><Link to="/app">云图列表</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item><Link to="/cloud">云图列表</Link></Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
-                <div className="btn"><Link to="/create">创 建</Link></div>
+                <Link to="/create"><div className="btn">创 建</div></Link>
                 <div className="listContent">
                     {imgBuild(this.state.data)}
                 </div>

@@ -5,19 +5,17 @@ header .headerContent{
   height: 100%;
   position: relative;
 }
-header .headerContent p{
+header .headerContent>div{
   height: 100%;
   line-height: 72px;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 16px;
   /*cursor: pointer;*/
   display: inline-block;
   padding-left: 160px;
+  float: left;
 }
-header .headerContent p:nth-child(2){
-  padding-left: 80px;
-}
-header .headerContent p span{
+header .headerContent>div> span{
   background-image: url("../../images/48.png");
   margin-left: -160px;
   position: absolute;
@@ -25,16 +23,16 @@ header .headerContent p span{
   height: 48px;
   margin-top: 12px;
 }
-header .headerContent p:after{
-  content: '';
-  position: absolute;
-  width: 100px;
-  height: 4px;
-  border-radius: 2px;
-  background-color: #ffcb00;
-  margin-top: 68px;
-  margin-left: -70px;
-}
+/*header .headerContent p:after{*/
+  /*content: '';*/
+  /*position: absolute;*/
+  /*width: 100px;*/
+  /*height: 4px;*/
+  /*border-radius: 2px;*/
+  /*background-color: #ffcb00;*/
+  /*margin-top: 68px;*/
+  /*margin-left: -70px;*/
+/*}*/
 .headerContent>img{
   right: 124px;
   width: 48px;
@@ -53,4 +51,14 @@ header .headerContent p:after{
   font-size: 24px;
   position: absolute;
   right: 0;
+}
+.links{
+  width: 100px;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  height: 100%;
+  line-height: 72px;
+  color: #999999;
+  display:block;
 }

@@ -23,8 +23,7 @@ export default class Login extends React.Component{
             cookie.set('token',jsonResult.data.token);
             cookie.set('qiNiuToken',jsonResult.data.qiuNiuToken);
             cookie.set('userName',jsonResult.data.admin.adminName);
-            cookie.set('vToken',jsonResult.data.admin.adminName);
-            hashHistory.push('/app')
+            hashHistory.push('/studioList')
           }else{
             message.error('登录失败，'+jsonResult.msg)
           }
@@ -36,25 +35,25 @@ export default class Login extends React.Component{
   render =()=>{
     const { getFieldDecorator } = this.props.form;
     const style = {
-      width:'313px',
-      height:'72px',
+      width:'250px',
+      height:'57px',
       fontSize:'24px',
       color:'#333333',
       backgroundColor:'white',
-      paddingLeft:'30px'
+      paddingLeft:'24px'
     };
     const btn = {
-      width:'399px',
-      height:'72px',
-      fontSize:'32px',
+      width:'319px',
+      height:'57px',
+      fontSize:'24px',
       color:'#333333',
       backgroundColor:'#ffcb00',
       borderColor:'#ffcb00',
-      marginTop:'72px'
+      marginTop:'57px'
     };
     const icon = {
-      width:'72px',
-      fontSize:'36px'
+      width:'50px',
+      fontSize:'24px'
     };
     return(
       <div className="login">

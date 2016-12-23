@@ -79,28 +79,31 @@ export default class StudioListOther extends React.Component {
                 data.map((item, index)=> {
                     if (item.state === 1) {
                         return (
-                            <div key={index} onClick={detail(item.albumId)}>
+                            <div className="something" key={index} onClick={detail(item.albumId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#3e9cdc', fontSize: '14px'}}>审核中</p>
+                                <div className="gray">{item.author}</div>
                             </div>
                         )
                     }
                     if (item.state === 2) {
                         return (
-                            <div key={index} onClick={detail(item.albumId)}>
+                            <div className="something" key={index} onClick={detail(item.albumId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核未通过</p>
+                                <div className="gray">{item.author}</div>
                             </div>
                         )
                     }
                     if (item.state === 3) {
                         return (
-                            <div key={index} onClick={detail(item.albumId)}>
+                            <div className="something" key={index} onClick={detail(item.albumId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#13a870', fontSize: '14px'}}>审核通过</p>
+                                <div className="gray">{item.author}</div>
                             </div>
                         )
                     }
@@ -120,7 +123,7 @@ export default class StudioListOther extends React.Component {
                         <Breadcrumb.Item><Link to="/studioListOther">影集列表</Link></Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
-                <div className="btn"><Link to="/createOther">创 建</Link></div>
+                <Link to="/createOther"><div className="btn">创 建</div></Link>
                 <div className="listContent">
                     {imgBuild(this.state.data)}
                 </div>

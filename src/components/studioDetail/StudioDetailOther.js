@@ -1,8 +1,10 @@
 import React from 'react'
-import {Breadcrumb, Input, Carousel, Modal, Button} from 'antd';
+import {Breadcrumb, Input, Carousel, Modal, Button, Upload, Icon, notification, message} from 'antd';
 import {RouteHandler, hashHistory, Link} from "react-router"
-import {getSingleData, delSingleData} from '../../services/service'
+import {getSingleData, delSingleData, changeData} from '../../services/service'
+import {qiNiu, qiNiuDomain, qiNiuBucket} from '../../../config'
 import './studioDetail.css'
+import cookie from 'js-cookie'
 
 const confirm = Modal.confirm;
 
@@ -15,6 +17,62 @@ export default class StudioDetailOther extends React.Component {
                 imageUrl: ''
             }]
         },
+        visible: false,
+        xml: '',
+        dat: ''
+    };
+
+    openNotificationWithIcon = (type, text) => (
+        notification[type]({
+            message: '上传错误',
+            description: text,
+        })
+    );
+
+    beforeUpload = (file)=> {
+        // console.log(file.type);
+        const isType = ()=> {
+            if (file.name.indexOf('.dat') === -1 && file.type.indexOf('text/xml') === -1) {
+                return false
+            } else {
+                return true
+            }
+        };
+        if (!isType()) {
+            this.openNotificationWithIcon('error', '只能上传.xml或者.dat格式的文件');
+        }
+        return isType()
+    };
+
+    showModal = ()=> {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    handleOk = ()=> {
+        if ((this.state.xml && this.state.dat) != '') {
+            let upData = {
+                localResource: this.state.xml + ';' + this.state.dat,
+                state: 3,
+                albumId: this.props.params.id
+            };
+            changeData(upData).then(({jsonResult})=> {
+                if (jsonResult) {
+                    this.setState({
+                        visible: false,
+                    });
+                }
+            });
+        }else{
+            message.error('请上传文件',3)
+        }
+    };
+
+    handleCancel = (e)=> {
+        this.setState({
+            visible: false,
+        });
     };
 
     componentWillMount() {
@@ -30,6 +88,21 @@ export default class StudioDetailOther extends React.Component {
     // componentDidMount(){
     //   console.log(this.state.data.photoList);
     // }
+
+    handleChange = (info) => {
+        console.log(info.file);
+        if (info.file.status === 'done') {
+            if (info.file.type === 'text/xml') {
+                this.state.xml = qiNiuDomain + '/' + info.file.response.key;
+                message.success(`上传${info.file.name}成功`, 3)
+            }else {
+                this.state.dat = qiNiuDomain + '/' + info.file.response.key;
+                message.success(`上传${info.file.name}成功`, 3)
+            }
+        } else if (info.file.status === 'error') {
+            message.error('该文件名已存在，请重命名文件', 3)
+        }
+    };
 
     render = () => {
         const del = ()=> {
@@ -56,6 +129,13 @@ export default class StudioDetailOther extends React.Component {
             hashHistory.push(`/changeOther/${this.props.params.id}`)
         };
 
+        const headersBuilder = (file)=> {
+            return ({
+                token: cookie.get('qiNiuToken'),
+                key: 'photo/' + file.name
+            });
+        };
+
         return (
             <div className="detail">
                 <span style={{position: 'absolute', width: '4px', height: '24px', backgroundColor: '#333333'}}/>
@@ -70,6 +150,7 @@ export default class StudioDetailOther extends React.Component {
                 <div className="detailContent" style={{height: '500px'}}>
                     <div className="btn" onClick={change}>修 改</div>
                     <div className="btn" onClick={del}>删 除</div>
+                    <div className="btn" onClick={this.showModal}>上传识别资源</div>
                     <div style={{
                         width: '952px',
                         margin: 'auto',
@@ -110,6 +191,23 @@ export default class StudioDetailOther extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Modal title="上传识别资源" visible={this.state.visible}
+                       onOk={this.handleOk} onCancel={this.handleCancel}
+                >
+                    <div style={{margin: 'auto', width: '300px'}}>
+                        <Upload
+                            className="avatar-uploader"
+                            name="file"
+                            showUploadList={false}
+                            action={qiNiu}
+                            beforeUpload={this.beforeUpload}
+                            onChange={this.handleChange}
+                            data={headersBuilder}
+                        >
+                            <Icon type="plus" className="avatar-uploader-trigger"/>
+                        </Upload>
+                    </div>
+                </Modal>
             </div>
         )
     }

@@ -412,7 +412,7 @@ export default class Change extends React.Component {
                 <div style={{marginLeft: '16px', marginBottom: '12px'}}>
                     <Breadcrumb separator=">">
                         <Breadcrumb.Item>云图管理</Breadcrumb.Item>
-                        <Breadcrumb.Item><Link to="/app">云图列表</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item><Link to="/studioList">云图列表</Link></Breadcrumb.Item>
                         <Breadcrumb.Item><Link
                             to={`/studioDetail/${this.props.params.id}`}>云图详情</Link></Breadcrumb.Item>
                         <Breadcrumb.Item><Link to={`/change/${this.props.params.id}`}>修改云图</Link></Breadcrumb.Item>
