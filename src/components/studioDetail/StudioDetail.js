@@ -57,7 +57,7 @@ export default class StudioDetail extends React.Component {
                     delSingleDataImg(that)
                         .then(({jsonResult})=> {
                             if (jsonResult.success) {
-                                hashHistory.push('/app')
+                                hashHistory.push('/cloud')
                             }
                         });
                 },
@@ -76,7 +76,7 @@ export default class StudioDetail extends React.Component {
                 <div style={{marginLeft: '16px', marginBottom: '12px'}}>
                     <Breadcrumb separator=">">
                         <Breadcrumb.Item>云图管理</Breadcrumb.Item>
-                        <Breadcrumb.Item><Link to="/app">云图列表</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item><Link to="/cloud">云图列表</Link></Breadcrumb.Item>
                         <Breadcrumb.Item><Link to={`/change/${this.props.params.id}`}>云图详情</Link></Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
