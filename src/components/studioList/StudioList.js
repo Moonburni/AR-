@@ -103,7 +103,7 @@ export default class StudioList extends React.Component {
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#13a870', fontSize: '14px'}}>审核通过</p>
-
+                                <div className="gray">{item.companyName}</div>
                             </div>
                         )
                     }

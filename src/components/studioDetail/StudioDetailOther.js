@@ -64,6 +64,10 @@ export default class StudioDetailOther extends React.Component {
                     });
                 }
             });
+        }else if( this.state.dat === ''){
+            message.error('请上传.dat文件',3)
+        }else if( this.state.xml === ''){
+            message.error('请上传.xml文件',3)
         }else{
             message.error('请上传文件',3)
         }

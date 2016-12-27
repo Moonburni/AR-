@@ -349,6 +349,26 @@ export default class ChangeOther extends React.Component {
                         }
                     </Upload>
                 )
+            }else if(this.state.state === 2){
+                return(
+                    <Upload
+                        className="avatar-uploader"
+                        name="file"
+                        showUploadList={true}
+                        action={qiNiu}
+                        beforeUpload={this.beforeUploadOther}
+                        onChange={this.handleChangeOther}
+                        data={headersBuilderOther}
+                        multiple={true}
+                        onRemove={this.removeFile}
+                    >
+                        {
+                            imageUrl1 ?
+                                <Icon type="plus" className="avatar-uploader-trigger"/> :
+                                <Icon type="plus" className="avatar-uploader-trigger"/>
+                        }
+                    </Upload>
+                )
             }
         };
 
