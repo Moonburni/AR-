@@ -349,7 +349,7 @@ export default class ChangeOther extends React.Component {
                         }
                     </Upload>
                 )
-            }else if(this.state.state === 2){
+            }else if(this.state.data.state != 3){
                 return(
                     <Upload
                         className="avatar-uploader"

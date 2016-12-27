@@ -207,6 +207,7 @@ export default class StudioDetailOther extends React.Component {
                             beforeUpload={this.beforeUpload}
                             onChange={this.handleChange}
                             data={headersBuilder}
+                            multiple={true}
                         >
                             <Icon type="plus" className="avatar-uploader-trigger"/>
                         </Upload>

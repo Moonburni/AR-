@@ -49,7 +49,7 @@ export default class Change extends React.Component {
         let dataSize = 0;
         getSingleDataImg(this.props.params.id)
             .then(({jsonResult}) => {
-                // console.log(jsonResult.data);
+                console.log(jsonResult.data);
                 this.setState({
                     data: jsonResult.data,
                     coverImageUrl: jsonResult.data.coverImageUrl,
@@ -403,7 +403,7 @@ export default class Change extends React.Component {
                         }
                     </Upload>
                 )
-            }else if(this.state.state === 2){
+            }else if(this.state.data.state === 2){
                 return(
                     <Upload
                         className="avatar-uploader"

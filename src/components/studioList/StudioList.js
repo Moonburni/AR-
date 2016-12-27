@@ -35,7 +35,7 @@ export default class StudioList extends React.Component {
             if (
                 this.state.display === 0 &&
                 document.body.scrollTop + document.body.clientHeight >= document.body.scrollHeight &&
-                location.hash.indexOf('app') != -1) {
+                (location.hash.indexOf('studioList') != -1 || location.hash.indexOf('cloud') != -1)) {
                 // console.log(scrollNum);
                 // console.log(this.state.display);
                 getDataImg(scrollNum)

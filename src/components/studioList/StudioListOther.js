@@ -35,7 +35,7 @@ export default class StudioListOther extends React.Component {
             if (
                 this.state.display === 0 &&
                 document.body.scrollTop + document.body.clientHeight >= document.body.scrollHeight &&
-                location.hash.indexOf('studioListOther') != -1) {
+                (location.hash.indexOf('studioListOther') != -1 || location.hash.indexOf('video') != -1)) {
                 // console.log(scrollNum);
                 // console.log(this.state.display);
                 getData(scrollNum)
@@ -83,7 +83,7 @@ export default class StudioListOther extends React.Component {
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#3e9cdc', fontSize: '14px'}}>审核中</p>
-                                <div className="gray">{item.author}</div>
+                                <div className="gray">{item.albumName}</div>
                             </div>
                         )
                     }
@@ -93,7 +93,7 @@ export default class StudioListOther extends React.Component {
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核未通过</p>
-                                <div className="gray">{item.author}</div>
+                                <div className="gray">{item.albumName}</div>
                             </div>
                         )
                     }
@@ -103,7 +103,7 @@ export default class StudioListOther extends React.Component {
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                 <p style={{color: '#13a870', fontSize: '14px'}}>审核通过</p>
-                                <div className="gray">{item.author}</div>
+                                <div className="gray">{item.albumName}</div>
                             </div>
                         )
                     }
