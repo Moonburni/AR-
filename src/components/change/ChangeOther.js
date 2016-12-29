@@ -464,7 +464,7 @@ export default class ChangeOther extends React.Component {
                                 <div style={{width: '300px', height: '160px', marginTop: '24px',clear:'both'}}>
 
                                 </div>
-                                <div className="btn" style={{marginLeft: '76px'}}><Link to="/app">返回影集列表</Link></div>
+                                <div className="btn" style={{marginLeft: '76px'}}><Link to="/video">返回影集列表</Link></div>
                             </div>
                         </div>
                     </div>

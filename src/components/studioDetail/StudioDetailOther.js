@@ -176,7 +176,7 @@ export default class StudioDetailOther extends React.Component {
                             <span>资源大小</span>
                             <div id="resourceSize">{this.state.data.resourceSize}Mb</div>
                             <span>影集描述</span>
-                            <div id="description " style={{height: '80px'}}>{this.state.data.description}</div>
+                            <div id="description " style={{height: '80px',lineHeight:'20px',overflow:'auto'}}>{this.state.data.description}</div>
                             <span>联系电话</span>
                             <div id="contactName">{this.state.data.contactName}</div>
                             <span>联系地址</span>
