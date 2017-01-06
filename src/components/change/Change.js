@@ -300,6 +300,7 @@ export default class Change extends React.Component {
                             photoList: this.state.data.photoList,
                             contactNum: document.getElementById('contactNum').value || this.state.data.contactNum,
                             resourceSize: this.state.fileWeight.toFixed(2),
+                            state:1,
                             linkList:[
                                 {
                                     linkName:document.getElementById('input-small1').value || this.state.data.linkList[0].linkName,
@@ -332,6 +333,7 @@ export default class Change extends React.Component {
                             description: document.getElementById('description').value || this.state.data.description,
                             photoList: data,
                             resourceSize: this.state.fileWeight.toFixed(2),
+                            state:1,
                             linkList:[
                                 {
                                     linkName:document.getElementById('input-small1').value || this.state.data.linkList[0].linkName,

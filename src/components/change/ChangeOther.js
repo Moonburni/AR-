@@ -272,7 +272,8 @@ export default class ChangeOther extends React.Component {
                             description: document.getElementById('description').value || this.state.data.description,
                             photoList: this.state.data.photoList,
                             contactName: document.getElementById('contactName').value || this.state.data.contactName,
-                            resourceSize: this.state.fileWeight.toFixed(2)
+                            resourceSize: this.state.fileWeight.toFixed(2),
+                            state:1
                         };
                         // console.log(upData);
                         changeData(upData).then(({jsonResult})=> {
@@ -291,7 +292,8 @@ export default class ChangeOther extends React.Component {
                             coverImageUrl: this.state.coverImageUrl,
                             description: document.getElementById('description').value || this.state.data.description,
                             photoList: data,
-                            resourceSize: this.state.fileWeight.toFixed(2)
+                            resourceSize: this.state.fileWeight.toFixed(2),
+                            state:1
                         };
                         // console.log(upData);
                         changeData(upData).then(({jsonResult})=> {
@@ -473,5 +475,3 @@ export default class ChangeOther extends React.Component {
         )
     }
 }
-
-
