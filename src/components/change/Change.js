@@ -40,7 +40,7 @@ export default class Change extends React.Component {
         lastList: [],
         lastWeight: '',
         fileWeight: 0,
-        initList:[],
+        initList:null,
         loading:false,
     };
 
@@ -380,32 +380,54 @@ export default class Change extends React.Component {
         };
 
         const upLoad = ()=> {
-            let initList = this.state.initList;
-            // console.log(initList);
-            // console.log( this.state.fileList);
-            if (initList.length > 0 || init === 1 ) {
-                init = 1;
-                return (
-                   <Upload
-                        className="avatar-uploader"
-                        name="file"
-                        showUploadList={true}
-                        action={qiNiu}
-                        beforeUpload={this.beforeUploadOther}
-                        onChange={this.handleChangeOther}
-                        data={headersBuilderOther}
-                        multiple={true}
-                        onRemove={this.removeFile}
-                        defaultFileList={initList}
-                    >
-                        {
-                            imageUrl1 ?
-                                <Icon type="plus" className="avatar-uploader-trigger"/> :
-                                <Icon type="plus" className="avatar-uploader-trigger"/>
-                        }
-                    </Upload>
-                )
-            }else if(this.state.data.state != 3){
+            if(this.state.data.state === 3){
+                if ( this.state.initList != null && this.state.initList.length > 0) {
+                    return (
+                        <Upload
+                            className="avatar-uploader"
+                            name="file"
+                            showUploadList={true}
+                            action={qiNiu}
+                            beforeUpload={this.beforeUploadOther}
+                            onChange={this.handleChangeOther}
+                            data={headersBuilderOther}
+                            multiple={true}
+                            onRemove={this.removeFile}
+                            defaultFileList={this.state.initList}
+                        >
+                            {
+                                imageUrl1 ?
+                                    <Icon type="plus" className="avatar-uploader-trigger"/> :
+                                    <Icon type="plus" className="avatar-uploader-trigger"/>
+                            }
+                        </Upload>
+                    )
+                }else if(this.state.initList != null){
+                    return(
+                        <Upload
+                            className="avatar-uploader"
+                            name="file"
+                            showUploadList={true}
+                            action={qiNiu}
+                            beforeUpload={this.beforeUploadOther}
+                            onChange={this.handleChangeOther}
+                            data={headersBuilderOther}
+                            multiple={true}
+                            onRemove={this.removeFile}
+                        >
+                            {
+                                imageUrl1 ?
+                                    <Icon type="plus" className="avatar-uploader-trigger"/> :
+                                    <Icon type="plus" className="avatar-uploader-trigger"/>
+                            }
+                        </Upload>
+                    )
+                }else{
+                    return ''
+                }
+            }
+
+            else if(this.state.data.state != 3){
                 return(
                     <Upload
                         className="avatar-uploader"

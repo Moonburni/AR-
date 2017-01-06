@@ -301,17 +301,17 @@ export default class Create extends React.Component {
                                 <p>链接1</p>
                                 <InputGroup>
                                     <Input placeholder="链接名" className="input-small" id="input-small1"/>
-                                    <Input placeholder="链接地址(选填),如www.xxx.com" className="input-big" id="input-big1"/>
+                                    <Input placeholder="链接地址(选填),如http://www.xxx.com" className="input-big" id="input-big1"/>
                                 </InputGroup>
                                 <p>链接2</p>
                                 <InputGroup>
                                     <Input placeholder="链接名" className="input-small" id="input-small2"/>
-                                    <Input placeholder="链接地址(选填),如www.xxx.com" className="input-big" id="input-big2"/>
+                                    <Input placeholder="链接地址(选填),如http://www.xxx.com" className="input-big" id="input-big2"/>
                                 </InputGroup>
                                 <p>链接3</p>
                                 <InputGroup>
                                     <Input placeholder="链接名" className="input-small" id="input-small3"/>
-                                    <Input placeholder="链接地址(选填),如www.xxx.com" className="input-big" id="input-big3"/>
+                                    <Input placeholder="链接地址(选填),如http://www.xxx.com" className="input-big" id="input-big3"/>
                                 </InputGroup>
                             </div>
                             <div className="btn" style={{marginLeft: 'calc(50% - 76px)'}} onClick={move}>下一步</div>

@@ -5,7 +5,7 @@ import {qiNiu, qiNiuDomain, qiNiuBucket} from '../../../config'
 import {changeData, getSingleData, getQiNiuData} from '../../services/service'
 import cookie from 'js-cookie'
 
-let init = 0;
+// let init = 0;
 export default class ChangeOther extends React.Component {
 
 
@@ -26,8 +26,9 @@ export default class ChangeOther extends React.Component {
         lastList: [],
         lastWeight: '',
         fileWeight: 0,
-        initList:[],
-        loading:false
+        initList:null,
+        loading:false,
+        init:0
     };
 
     componentWillMount = () => {
@@ -35,7 +36,7 @@ export default class ChangeOther extends React.Component {
         let dataSize = 0;
         getSingleData(this.props.params.id)
             .then(({jsonResult}) => {
-                console.log(jsonResult.data);
+                // console.log(jsonResult.data);
                 this.setState({
                     data: jsonResult.data,
                     coverImageUrl: jsonResult.data.coverImageUrl,
@@ -70,9 +71,9 @@ export default class ChangeOther extends React.Component {
                             fileList: datas,
                             lastList:datas,
                             initList:datas,
-                            fileWeight:dataSize / 1024 / 1024
+                            fileWeight:dataSize / 1024 / 1024,
                         })
-                    });
+                    }).catch((err)=>console.log(err));
             });
     };
 
@@ -326,32 +327,54 @@ export default class ChangeOther extends React.Component {
         };
 
         const upLoad = ()=> {
-            let initList = this.state.initList;
-            // console.log(initList);
-            // console.log( this.state.fileList);
-            if (initList.length > 0 || init === 1 ) {
-                init = 1;
-                return (
-                    <Upload
-                        className="avatar-uploader"
-                        name="file"
-                        showUploadList={true}
-                        action={qiNiu}
-                        beforeUpload={this.beforeUploadOther}
-                        onChange={this.handleChangeOther}
-                        data={headersBuilderOther}
-                        multiple={true}
-                        onRemove={this.removeFile}
-                        defaultFileList={initList}
-                    >
-                        {
-                            imageUrl1 ?
-                                <Icon type="plus" className="avatar-uploader-trigger"/> :
-                                <Icon type="plus" className="avatar-uploader-trigger"/>
-                        }
-                    </Upload>
-                )
-            }else if(this.state.data.state != 3){
+            if(this.state.data.state === 3){
+                if ( this.state.initList != null && this.state.initList.length > 0) {
+                    return (
+                        <Upload
+                            className="avatar-uploader"
+                            name="file"
+                            showUploadList={true}
+                            action={qiNiu}
+                            beforeUpload={this.beforeUploadOther}
+                            onChange={this.handleChangeOther}
+                            data={headersBuilderOther}
+                            multiple={true}
+                            onRemove={this.removeFile}
+                            defaultFileList={this.state.initList}
+                        >
+                            {
+                                imageUrl1 ?
+                                    <Icon type="plus" className="avatar-uploader-trigger"/> :
+                                    <Icon type="plus" className="avatar-uploader-trigger"/>
+                            }
+                        </Upload>
+                    )
+                }else if(this.state.initList != null){
+                    return(
+                        <Upload
+                            className="avatar-uploader"
+                            name="file"
+                            showUploadList={true}
+                            action={qiNiu}
+                            beforeUpload={this.beforeUploadOther}
+                            onChange={this.handleChangeOther}
+                            data={headersBuilderOther}
+                            multiple={true}
+                            onRemove={this.removeFile}
+                        >
+                            {
+                                imageUrl1 ?
+                                    <Icon type="plus" className="avatar-uploader-trigger"/> :
+                                    <Icon type="plus" className="avatar-uploader-trigger"/>
+                            }
+                        </Upload>
+                    )
+                }else{
+                    return ''
+                }
+            }
+
+            else if(this.state.data.state != 3){
                 return(
                     <Upload
                         className="avatar-uploader"

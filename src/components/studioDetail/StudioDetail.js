@@ -108,11 +108,11 @@ export default class StudioDetail extends React.Component {
                             <span>联系地址</span>
                             <div id="address">{this.state.data.address}</div>
                             <span>链接1</span>
-                            <div id="contact1">{this.state.data.linkList[0].linkName}:<a href={`http://${this.state.data.linkList[0].linkUrl}`}>{this.state.data.linkList[0].linkUrl}</a></div>
+                            <div id="contact1">{this.state.data.linkList[0].linkName}:<a href={`${this.state.data.linkList[0].linkUrl}`}>{this.state.data.linkList[0].linkUrl}</a></div>
                             <span>链接2</span>
-                            <div id="contact2">{this.state.data.linkList[1].linkName}:<a href={`http://${this.state.data.linkList[1].linkUrl}`}>{this.state.data.linkList[1].linkUrl}</a></div>
+                            <div id="contact2">{this.state.data.linkList[1].linkName}:<a href={`${this.state.data.linkList[1].linkUrl}`}>{this.state.data.linkList[1].linkUrl}</a></div>
                             <span>链接3</span>
-                            <div id="contact3">{this.state.data.linkList[2].linkName}:<a href={`http://${this.state.data.linkList[2].linkUrl}`}>{this.state.data.linkList[2].linkUrl}</a></div>
+                            <div id="contact3">{this.state.data.linkList[2].linkName}:<a href={`${this.state.data.linkList[2].linkUrl}`}>{this.state.data.linkList[2].linkUrl}</a></div>
                         </div>
                         <div className="imgContent">
                             <Carousel autoplay>

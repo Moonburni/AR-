@@ -51,6 +51,9 @@
   text-align: center;
   line-height: 48px;
 }
+.list .btn{
+  display: inline-block;
+}
 .list>p{
   clear: both;
   font-size: 12px;
