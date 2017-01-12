@@ -2,6 +2,7 @@ import React from 'react'
 import {Breadcrumb, Input, Carousel, Modal, Button} from 'antd';
 import {RouteHandler, hashHistory, Link} from "react-router"
 import {getSingleDataImg, delSingleDataImg} from '../../services/service'
+import {host} from "../../../config"
 import './studioDetail.css'
 
 const confirm = Modal.confirm;
@@ -81,7 +82,7 @@ export default class StudioDetail extends React.Component {
                     </Breadcrumb>
                 </div>
                 <div className="detailContent">
-                    <div className="btn" onClick={change}>修 改</div>
+                    <div className="btn" onClick={change}>更 新</div>
                     <div className="btn" onClick={del}>删 除</div>
                     <div style={{
                         width: '952px',
@@ -124,6 +125,10 @@ export default class StudioDetail extends React.Component {
                                         )
                                     })}
                             </Carousel>
+                        </div>
+                        <div className="imgContent" style={{marginTop:'220px'}}>
+                            <img src={`${host}/api/QRCode/cloudImage?id=${this.props.params.id}`}/>
+                            <p style={{textAlign:'center'}}>扫描获取名片资源<br/>*右键另存为图片可保存该二维码</p>
                         </div>
                     </div>
                 </div>

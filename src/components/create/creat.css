@@ -52,35 +52,68 @@
 }
 .createTitle>div:first-child{
   margin-left: 0;
-  background-image: url("../../images/添加封面及相关信息h.png");
+  background-image: url("../../images/影集步骤1h.png");
 }
 .createTitle>div:nth-child(2){
-  background-image: url("../../images/上传图片和视频n.png");
+  background-image: url("../../images/影集步骤2n.png");
 }
 .createTitle>div:nth-child(3){
-  background-image: url("../../images/提交审核n.png");
+  background-image: url("../../images/系统处理n.png");
   width: 300px;
 }
 .box:nth-child(3) .createTitle>div:first-child{
   margin-left: 0;
-  background-image: url("../../images/添加封面及相关信息n.png");
+  background-image: url("../../images/影集步骤1n.png");
 }
 .box:nth-child(3) .createTitle>div:nth-child(2){
-  background-image: url("../../images/上传图片和视频n.png");
+  background-image: url("../../images/影集步骤2n.png");
 }
 .box:nth-child(3) .createTitle>div:nth-child(3){
-  background-image: url("../../images/提交审核h.png");
+  background-image: url("../../images/系统处理h.png");
   width: 300px;
 }
 .box:nth-child(2) .createTitle>div:first-child{
   margin-left: 0;
-  background-image: url("../../images/添加封面及相关信息n.png");
+  background-image: url("../../images/影集步骤1n.png");
 }
 .box:nth-child(2) .createTitle>div:nth-child(2){
-  background-image: url("../../images/上传图片和视频h.png");
+  background-image: url("../../images/影集步骤2h.png");
 }
 .box:nth-child(2) .createTitle>div:nth-child(3){
-  background-image: url("../../images/提交审核n.png");
+  background-image: url("../../images/系统处理n.png");
+  width: 300px;
+}
+.cloud .createTitle>div:first-child{
+  margin-left: 0;
+  background-image: url("../../images/名片步骤1h.png");
+}
+.cloud .createTitle>div:nth-child(2){
+  background-image: url("../../images/名片步骤2n.png");
+}
+.cloud .createTitle>div:nth-child(3){
+  background-image: url("../../images/系统处理n.png");
+  width: 300px;
+}
+.cloud .box:nth-child(3) .createTitle>div:first-child{
+  margin-left: 0;
+  background-image: url("../../images/名片步骤1n.png");
+}
+.cloud .box:nth-child(3) .createTitle>div:nth-child(2){
+  background-image: url("../../images/名片步骤2n.png");
+}
+.cloud .box:nth-child(3) .createTitle>div:nth-child(3){
+  background-image: url("../../images/系统处理h.png");
+  width: 300px;
+}
+.cloud .box:nth-child(2) .createTitle>div:first-child{
+  margin-left: 0;
+  background-image: url("../../images/名片步骤1n.png");
+}
+.cloud .box:nth-child(2) .createTitle>div:nth-child(2){
+  background-image: url("../../images/名片步骤2h.png");
+}
+.cloud .box:nth-child(2) .createTitle>div:nth-child(3){
+  background-image: url("../../images/系统处理n.png");
   width: 300px;
 }
 .box1Content{

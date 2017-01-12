@@ -451,7 +451,7 @@ export default class Change extends React.Component {
         };
 
         return (
-            <div className="create">
+            <div className="create cloud">
                 <span style={{position: 'absolute', width: '4px', height: '24px', backgroundColor: '#333333'}}/>
                 <div style={{marginLeft: '16px', marginBottom: '12px'}}>
                     <Breadcrumb separator=">">
@@ -538,7 +538,7 @@ export default class Change extends React.Component {
                                     marginTop: '-160px',
                                     borderRadius: '5px 0 0 5px'
                                 }}/>
-                                <span>*请图片对应视频，并且名字相同</span>
+                                <span>*请添加资源，并确保图片与视频名字相同</span>
 
                                 <div className="btn" onClick={moveOther} style={{marginLeft: 'calc(50% - 76px)'}}>下一步
                                 </div>
@@ -551,11 +551,11 @@ export default class Change extends React.Component {
                                 <div/>
                             </div>
                             <div className="box1Content" style={{marginLeft: '350px'}}>
-                                <p style={{width:'100%'}}>影集更新成功</p>
+                                <p style={{width:'100%'}}>已成功创建名片云图，请等待系统处理，如果创建失败，可能是网络原因，请修改资源后重新上传</p>
                                 <div style={{width: '300px', height: '160px', marginTop: '24px',clear:'both'}}>
 
                                 </div>
-                                <div className="btn" style={{marginLeft: '76px'}}><Link to="/cloud">返回影集列表</Link></div>
+                                <div className="btn" style={{marginLeft: '76px'}}><Link to="/cloud">名片列表</Link></div>
                             </div>
                         </div>
                     </div>

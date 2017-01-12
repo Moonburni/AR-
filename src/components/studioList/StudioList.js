@@ -82,7 +82,7 @@ export default class StudioList extends React.Component {
                             <div className="something" key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
-                                <p style={{color: '#3e9cdc', fontSize: '14px'}}>审核中</p>
+                                <p style={{color: '#3e9cdc', fontSize: '14px'}}>处理中</p>
                                 <div className="gray">{item.companyName}</div>
                             </div>
                         )
@@ -92,7 +92,7 @@ export default class StudioList extends React.Component {
                             <div className="something" key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
-                                <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核未通过</p>
+                                <p style={{color: '#fa5a5f', fontSize: '14px'}}>处理失败，请重新提交</p>
                                 <div className="gray">{item.companyName}</div>
                             </div>
                         )
@@ -102,7 +102,7 @@ export default class StudioList extends React.Component {
                             <div className="something" key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
-                                <p style={{color: '#13a870', fontSize: '14px'}}>审核通过</p>
+                                <p style={{color: '#13a870', fontSize: '14px'}}>提交成功</p>
                                 <div className="gray">{item.companyName}</div>
                             </div>
                         )
@@ -123,7 +123,7 @@ export default class StudioList extends React.Component {
                         <Breadcrumb.Item><Link to="/cloud">云图列表</Link></Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
-                <Link to="/create"><div className="btn">创 建</div></Link>
+                <Link to="/create"><div className="btn">添加名片</div></Link>
                 <div className="listContent">
                     {imgBuild(this.state.data)}
                 </div>

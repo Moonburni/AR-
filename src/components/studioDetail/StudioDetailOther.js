@@ -5,6 +5,8 @@ import {getSingleData, delSingleData, changeData} from '../../services/service'
 import {qiNiu, qiNiuDomain, qiNiuBucket} from '../../../config'
 import './studioDetail.css'
 import cookie from 'js-cookie'
+import {host} from "../../../config"
+
 
 const confirm = Modal.confirm;
 
@@ -82,7 +84,7 @@ export default class StudioDetailOther extends React.Component {
     componentWillMount() {
         getSingleData(this.props.params.id)
             .then(({jsonResult}) => {
-                console.log(jsonResult.data);
+                // console.log(jsonResult.data);
                 this.setState({
                     data: jsonResult.data
                 });
@@ -152,7 +154,7 @@ export default class StudioDetailOther extends React.Component {
                     </Breadcrumb>
                 </div>
                 <div className="detailContent" style={{height: '500px'}}>
-                    <div className="btn" onClick={change}>修 改</div>
+                    <div className="btn" onClick={change}>更 新</div>
                     <div className="btn" onClick={del}>删 除</div>
                     <div className="btn" onClick={this.showModal}>上传识别资源</div>
                     <div style={{
@@ -192,6 +194,10 @@ export default class StudioDetailOther extends React.Component {
                                         )
                                     })}
                             </Carousel>
+                        </div>
+                        <div className="imgContent" style={{marginTop:'180px'}}>
+                            <img src={`${host}/api/QRCode/album?id=${this.props.params.id}`}/>
+                            <p style={{textAlign:'center'}}>扫描获取影集资源<br/>*右键另存为图片可保存该二维码</p>
                         </div>
                     </div>
                 </div>

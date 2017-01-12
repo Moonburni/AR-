@@ -247,7 +247,7 @@ export default class Create extends React.Component {
         // );
 
         return (
-            <div className="create">
+            <div className="create cloud">
                 <span style={{position: 'absolute', width: '4px', height: '24px', backgroundColor: '#333333'}}/>
                 <div style={{marginLeft: '16px', marginBottom: '12px'}}>
                     <Breadcrumb separator=">">

@@ -9,7 +9,7 @@ const Header = () => {
     <header>
       <div className="headerContent">
         <div><span/></div>
-        <Link to="/cloud" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>云图</Link>
+        <Link to="/cloud" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>名片</Link>
         <Link to="/video" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>影集</Link>
         <span>{cookie.get('userName')}</span>
         <Link to="/">
