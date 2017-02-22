@@ -142,6 +142,30 @@ export default class StudioDetailOther extends React.Component {
             });
         };
 
+        const carouselBuild =()=>{
+            if(this.state.data.photoList[0].imageUrl === ''){
+                return ''
+            }else{
+                if(this.state.data.photoList.length > 1){
+                    return(
+                        <Carousel autoplay>
+                            {
+                                this.state.data.photoList.map((item, index)=> {
+                                    return (
+                                        <div key={index}><img src={`${item.imageUrl}?imageView2/1/w/348/h/348`}/>
+                                        </div>
+                                    )
+                                })}
+                        </Carousel>
+                    )
+                }else if(this.state.data.photoList.length === 1){
+                    return(
+                        <div><img src={`${this.state.data.photoList[0].imageUrl}?imageView2/1/w/348/h/348`}/></div>
+                    )
+                }
+            }
+        };
+
         return (
             <div className="detail">
                 <span style={{position: 'absolute', width: '4px', height: '24px', backgroundColor: '#333333'}}/>
@@ -185,15 +209,7 @@ export default class StudioDetailOther extends React.Component {
                             <div id="address">{this.state.data.address}</div>
                         </div>
                         <div className="imgContent">
-                            <Carousel autoplay>
-                                {
-                                    this.state.data.photoList.map((item, index)=> {
-                                        return (
-                                            <div key={index}><img src={`${item.imageUrl}?imageView2/1/w/348/h/348`}/>
-                                            </div>
-                                        )
-                                    })}
-                            </Carousel>
+                            {carouselBuild()}
                         </div>
                         <div className="imgContent" style={{marginTop:'180px'}}>
                             <img src={`${host}/api/QRCode/album?id=${this.props.params.id}`}/>
