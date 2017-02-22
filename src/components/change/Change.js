@@ -209,6 +209,12 @@ export default class Change extends React.Component {
         const imageUrl1 = this.state.imageUrl1;
 
         const move = () => {
+            if(this.state.data.state === 2){
+                this.setState({
+                    fileList:[],
+                    fileWeight:0
+                });
+            }
             let data = {
                 address: document.getElementById('address').value || this.state.data.address,
                 companyName: document.getElementById('companyName').value || this.state.data.companyName,

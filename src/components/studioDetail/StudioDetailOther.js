@@ -17,11 +17,17 @@ export default class StudioDetailOther extends React.Component {
         data: {
             photoList: [{
                 imageUrl: ''
-            }]
+            }],
         },
         visible: false,
         xml: '',
-        dat: ''
+        dat: '',
+        state:'',
+        disabled:{
+            value:'',
+            text:'',
+            style:{}
+        }
     };
 
     openNotificationWithIcon = (type, text) => (
@@ -88,6 +94,27 @@ export default class StudioDetailOther extends React.Component {
                 this.setState({
                     data: jsonResult.data
                 });
+                if(jsonResult.data.state === 1){
+                    this.setState({
+                        disabled:{
+                            value:'disabled',
+                            style:{
+                                background:'grey',
+                                color:'white',
+                                cursor:'not-allowed',
+                            },
+                            text:'(审核中)',
+                        }
+                    })
+                }else{
+                    this.setState({
+                        disabled:{
+                            value:'',
+                            style:{},
+                            text:'',
+                        }
+                    })
+                }
             });
     }
 
@@ -178,9 +205,11 @@ export default class StudioDetailOther extends React.Component {
                     </Breadcrumb>
                 </div>
                 <div className="detailContent" style={{height: '500px'}}>
-                    <div className="btn" onClick={change}>更 新</div>
-                    <div className="btn" onClick={del}>删 除</div>
-                    <div className="btn" onClick={this.showModal}>上传识别资源</div>
+                    <button className="btn" onClick={change} disabled={this.state.disabled.value} style={this.state.disabled.style}>
+                        更 新{this.state.disabled.text}
+                    </button>
+                    <button className="btn" onClick={del}>删 除</button>
+                    <button className="btn" onClick={this.showModal}>上传识别资源</button>
                     <div style={{
                         width: '952px',
                         margin: 'auto',

@@ -123,27 +123,15 @@ export default class ChangeOther extends React.Component {
 
     beforeUploadOther = (file)=> {
         const isLt20MB = ()=> {
-            if (file.type.indexOf('image/') === -1 && file.size / 1024 / 1024 > 20) {
-                return false
-            } else {
-                return true
-            }
+            return !(file.type.indexOf('image/') === -1 && file.size / 1024 / 1024 > 20);
         };
 
         const isLt2MB = ()=> {
-            if (file.type.indexOf('video/mp4') === -1 && file.size / 1024 / 1024 > 2) {
-                return false
-            } else {
-                return true
-            }
+            return !(file.type.indexOf('video/mp4') === -1 && file.size / 1024 / 1024 > 2);
         };
 
         const isType = ()=> {
-            if (file.type.indexOf('image/') === -1 && file.type.indexOf('video/mp4') === -1) {
-                return false
-            } else {
-                return true
-            }
+            return !(file.type.indexOf('image/') === -1 && file.type.indexOf('video/mp4') === -1);
         };
         if (!isType()) {
             this.openNotificationWithIcon('error', '只能上传图片或者Mp4格式的视频');
@@ -195,6 +183,12 @@ export default class ChangeOther extends React.Component {
         const imageUrl1 = this.state.imageUrl1;
 
         const move = () => {
+            if(this.state.data.state === 2){
+                this.setState({
+                    fileList:[],
+                    fileWeight:0
+                });
+            }
             let data = {
                 address: document.getElementById('address').value || this.state.data.address,
                 albumName: document.getElementById('albumName').value || this.state.data.albumName,
