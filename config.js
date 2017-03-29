@@ -15,7 +15,6 @@ export default {
     qiNiuBucket: 'yidu-album-test'
 
 }
-
 //本地正式数据库
 // export default {
 //     host: 'http://localhost:8080',

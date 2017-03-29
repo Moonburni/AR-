@@ -1,65 +1,263 @@
-.detail{
-  width: 1000px;
-  height: auto;
-  margin: auto;
-  padding-top: 16px;
+.detail,.customer {
+    width: 1000px;
+    height: auto;
+    margin: auto;
+    padding-top: 16px;
 }
-.detailContent{
-  width:1000px;
-  height: 634px;
-  margin:auto;
-  background-color: white;
-  padding-top: 20px;
+
+.detailContent {
+    width: 1000px;
+    height: auto;
+    margin: auto;
+    background-color: white;
+    padding-top: 20px;
 }
-.detailContent .btn{
-  float: left;
-  margin-left: 24px;
-  margin-top: 0;
-  cursor: pointer;
+
+.detailContent .btn {
+    float: left;
+    margin-right: 24px;
+    margin-top: 0;
+    cursor: pointer;
 }
-.detailContent .textContent{
-  width: 580px;
-  height: 514px;
-  position: absolute;
+
+.detailContent .textContent {
+    width: 580px;
+    height: 514px;
+    position: absolute;
 }
-.detailContent .imgContent{
-  width: 174px;
-  height: 235px;
-  position: absolute;
-  right: 80px;
-  background-color:transparent;
+
+.detailContent .imgContent {
+    width: 174px;
+    height: 235px;
+    position: absolute;
+    right: 80px;
+    background-color: transparent;
 }
-.imgContent img{
-  width: 100%;
-  height: auto;
+
+.imgContent img {
+    width: 100%;
+    height: auto;
 }
-.textContent>div{
-  width: 428px;
-  height: 46px;
-  margin-left: 132px;
-  border:solid 1px #fafafa;
-  border-radius: 0;
-  border-top: transparent;
-  line-height: 46px;
-  font-size: 12px;
-  padding-left: 12px;
+
+.textContent > div, .textContent > input, .textContent > .ant-input, .textContent .ant-input-group {
+    width: 428px;
+    height: 46px;
+    margin-left: 132px;
+    border: solid 1px #fafafa;
+    border-radius: 0;
+    border-top: transparent;
+    line-height: 46px;
+    font-size: 12px;
+    padding-left: 12px;
+    display: block;
+    float: none;
 }
-.textContent>span{
-  position: absolute;
-  width: 132px;
-  height: 28px;
-  border-radius: 14px 0 0 14px;
-  background-color: #cccccc;
-  margin-top: 8px;
-  font-size: 14px;
-  text-align: center;
-  line-height: 28px;
-  color: white;
+
+.textContent .ant-input-group Input {
+    width: 50%;
+    height: 46px;
 }
-.detail .btn{
-  width: 120px;
-  height: 40px;
-  line-height: 40px;
-  margin-bottom: 20px;
-  font-size: 16px;
+
+.textContent .ant-input-group Input:hover {
+    border: solid 1px #fafafa;
+}
+
+.textContent .ant-input-group Input:focus {
+    border: solid 1px #fafafa;
+    box-shadow: none;
+}
+
+.firstBorder {
+    border-top: 1px solid #fafafa;
+}
+
+.textContent .ant-input-group {
+    padding: 0;
+}
+
+/*.textContent .ant-input:focus{*/
+/*border:solid 1px #fafafa;*/
+/*box-shadow: none;*/
+/*}*/
+.textContent > .greyTitle {
+    position: absolute;
+    width: 132px;
+    height: 28px;
+    border-radius: 14px 0 0 14px;
+    background-color: #cccccc;
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 28px;
+    color: white;
+}
+
+.detail .btn {
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.deleteTitle {
+    font-size: 18px;
+    color: #169bd5;
+    cursor: pointer;
+    line-height: 23px;
+}
+
+.deleteTitle:before {
+    content: url("../../images/删除.png");
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: -28px;
+}
+
+.littleTitle {
+    color: #444444;
+    font-size: 16px;
+    width: calc(100% - 48px);
+    margin: auto;
+    padding-left: 20px;
+    position: relative;
+}
+
+.littleTitle:before {
+    content: '';
+    width: 9px;
+    height: 18px;
+    background-color: #333333;
+    position: absolute;
+    margin-left: -20px;
+    margin-top: 2px;
+}
+
+.spot {
+    background-image: url("../../images/点.png");
+    background-position: 50%;
+    background-repeat: repeat-x;
+    width: calc(100% - 80px);
+    float: right;
+    height: 23px;
+}
+
+.spot1, .spot2 {
+    background-image: url("../../images/点.png");
+    background-position: 50%;
+    background-repeat: repeat-x;
+    width: calc(100% - 180px);
+    height: 23px;
+    position: absolute;
+    margin-top: -23px;
+    margin-left: 80px;
+}
+
+.spot2 {
+    width: calc(100% - 210px);
+}
+
+.checkBody {
+    height: 80px;
+    width: calc(100% - 48px);
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.infoBody{
+    height: 80px;
+    width: calc(100% - 48px);
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.infoBody div{
+    margin-right: 30px;
+}
+.changeTitle, .addTitle {
+    float: right;
+    font-size: 18px;
+    color: #444444;
+    cursor: pointer;
+    line-height: 23px;
+}
+
+.changeTitle:before, .addTitle:before {
+    content: url("../../images/修改.png");
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: -28px;
+}
+
+.addTitle:before {
+    content: url("../../images/再加一组.png");
+}
+
+.videoLittleBox {
+    width: 30%;
+    position: relative;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.videoLittleBox img {
+    width: 100%;
+    height: 160px;
+    margin: auto;
+
+}
+
+.videoLittleBox .videoBg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: rgba(28, 28, 28, 0.8);
+}
+
+.videoLittleBox .videoBg > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.videoClose{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 48px;
+    color: white;
+}
+.videoAction{
+    position: absolute;
+    width: 100%;
+    height: 36px;
+    background-color: rgba(255,255,255,0.2);
+    margin-top: -36px;
+}
+.videoAction span{
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+    line-height: 36px;
+    height: 36px;
+    color: black;
+    cursor: pointer;
+}
+.ant-upload-list{
+    position: absolute;
+    margin-left: 330px;
+    margin-top: -160px;
+    max-height: 150px;
+    overflow: auto;
+    z-index: 1;
+    width: 150px;
+    height: 160px;
 }

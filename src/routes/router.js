@@ -4,6 +4,7 @@ import cookie from 'js-cookie';
 import App from '../components/App';
 import Cloud from '../components/Cloud';
 import Video from '../components/Video';
+import SuperLogin from '../components/login/SuperLogin'
 import Login from '../components/login/Login'
 import StudioList from '../components/studioList/StudioList'
 import StudioListOther from '../components/studioList/StudioListOther'
@@ -13,12 +14,13 @@ import Create from '../components/create/Create'
 import Change from '../components/change/Change'
 import CreateOther from '../components/create/CreateOther'
 import ChangeOther from '../components/change/ChangeOther'
+import Customer from '../components/Customer'
 
 const Routes = () => {
     return (
         <Router history={hashHistory}>
             <Route path="/" component={Login}/>
-
+            <Route path="/superLogin" component={SuperLogin}/>
             <Route path="/app" component={App}
                    onEnter={(_ignore, replace)=> {
                        if (!cookie.getJSON('token')) {
@@ -40,6 +42,7 @@ const Routes = () => {
                     <Route path="/createOther" component={CreateOther}/>
                     <Route path="/changeOther/:id" component={ChangeOther}/>
                 </Route>
+                <Route path="/customer" component={Customer}/>
             </Route>
         </Router>
     )

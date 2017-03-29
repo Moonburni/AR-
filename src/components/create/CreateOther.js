@@ -193,6 +193,7 @@ export default class CreateOther extends React.Component {
                     message.error('请上传图片与视频', 3)
                 } else {
                     let upData = {
+                        adminId:cookie.get('adminId'),
                         address: document.getElementById('address').value,
                         albumName: document.getElementById('albumName').value,
                         author: document.getElementById('author').value,

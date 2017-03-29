@@ -147,6 +147,11 @@
   width: 300px;
   height: 160px;
 }
+.detail .avatar-uploader,
+.detail .avatar-uploader-trigger,.detail .avatar{
+  width: 174px;
+  height: 174px;
+}
 /*.avatar{*/
   /*width:200px;*/
   /*height:auto;*/
@@ -177,7 +182,7 @@
   float: left;
   margin-top: 20px;
 }
-.ant-upload-list{
+.create .ant-upload-list{
   position: absolute;
   margin-left: 350px;
   margin-top: -160px;

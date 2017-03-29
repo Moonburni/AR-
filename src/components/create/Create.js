@@ -191,6 +191,7 @@ export default class Create extends React.Component {
                     message.error('请上传图片与视频', 3)
                 } else {
                     let upData = {
+                        adminId:cookie.get('adminId'),
                         address: document.getElementById('address').value,
                         companyName: document.getElementById('companyName').value,
                         coverImageUrl: this.state.coverImageUrl,

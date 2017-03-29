@@ -10,14 +10,28 @@
   background-repeat: no-repeat;
 }
 .loginBox{
-  width: 384px;
-  height: 345px;
+  width: 400px;
+  height: 360px;
   position: absolute;
   left: 50%;
   top: 50%;
   margin-top: -156px;
-  margin-left: -172px;
-  background-image: url("../../images/扫码.png");
+  margin-left: -200px;
+  background-image: url("../../images/登录.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 32px;
+}
+.loginBoxR{
+  width: 400px;
+  height: 424px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -156px;
+  margin-left: -200px;
+  background-image: url("../../images/注册边框.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -32,4 +46,81 @@
 }
 .btn{
   cursor: pointer;
+}
+.login .ant-input-group{
+  width:260px!important;
+  margin-left: 40px;
+}
+.login .ant-form-explain{
+  width: 260px;
+  margin-left: 40px;
+}
+.login .modal{
+  background-color: rgba(18,18,18,0.8);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login .modal .modal-body{
+  width: 424px;
+  height: auto;
+  background-color: white;
+  z-index: 100;
+  padding-bottom:18px;
+}
+.modal-body-head{
+  background-color: #ffcb00;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+.modal-body-foot{
+  margin-top: 56px;
+  display: flex;
+  justify-content: space-around;
+  height: 48px;
+}
+.modal-body-foot-btn{
+  width: 136px;
+  height: 48px;
+  background-color: #ffcb00;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 48px;
+  color: #444444;
+  cursor: pointer;
+}
+.modal-body-content{
+  margin-left: 32px;
+  margin-right: 32px;
+  width: 100%;
+}
+.modal-body-content input{
+  width: calc(100% - 64px);
+  height: 48px;
+  margin-bottom: 16px;
+  padding-left: 16px;
+  border-radius: 5px;
+  background-color: #d9d9d9;
+  font-size: 18px;
+  border: none;
+  color: #666666;
+}
+.modal-body-content input::-webkit-input-placeholder { /* WebKit browsers */
+  color: white;
+}
+.modal-body-content input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: white;
+}
+.modal-body-content input::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: white;
+}
+.modal-body-content input:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: white;
 }

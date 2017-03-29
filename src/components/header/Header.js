@@ -9,8 +9,18 @@ const Header = () => {
     <header>
       <div className="headerContent">
         <div><span/></div>
-        <Link to="/cloud" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>名片</Link>
-        <Link to="/video" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>影集</Link>
+        {
+          cookie.get('roleId') === '2'?
+              <div>
+                  <Link to="/cloud" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>名片</Link>
+                  <Link to="/video" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>影集</Link>
+              </div>:
+              <div>
+                  <Link to="/cloud" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>名片审核</Link>
+                  <Link to="/video" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>影集管理</Link>
+                  <Link to="/customer" className="links" activeStyle={{color: 'white',borderBottom:'4px solid #ffcb00'}}>客户管理</Link>
+              </div>
+      }
         <span>{cookie.get('userName')}</span>
         <Link to="/">
         <Icon type="poweroff" style={{

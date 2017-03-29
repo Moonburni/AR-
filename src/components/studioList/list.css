@@ -17,6 +17,7 @@
 }
 .listContent{
   width: 1000px;
+  clear: both;
 }
 .listContent>div{
   width: 228px;
@@ -44,7 +45,7 @@
   width: 152px;
   height: 48px;
   border-radius: 4px;
-  color: #333333;
+  color: white;
   font-size: 18px;
   background-color: #ffcb00;
   margin-bottom: 24px;
@@ -85,4 +86,21 @@
   font-size: 24px;
   text-align: center;
   padding-top: 30%;
+}
+.new{
+  background-image: url("../../images/这里什么都没有.png");
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  height: 208px;
+  width: 328px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -68px;
+  margin-left: -164px;
+}
+.blank{
+  background-image: url("../../images/暂无结果.png");
 }
