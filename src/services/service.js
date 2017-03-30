@@ -3,6 +3,18 @@ import {xFetch} from './xFetch';
 export async function getQiNiuData(url) {
     return xFetch('/api/qiNiuFileInfo?key=photo/'+url);
 }
+
+export async function newUser(data) {
+    return xFetch(
+        '/api/admin',
+        {
+            method: 'POST',
+            body: JSON.stringify(data)
+        },
+    );
+}
+
+
 export async function login(user,roleId) {
   return xFetch(
     '/api/admin/token',

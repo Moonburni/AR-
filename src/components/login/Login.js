@@ -3,7 +3,7 @@ import {RouteHandler, hashHistory} from "react-router"
 import './login.css'
 import Header from '../header/HeaderLogin'
 import { Form, Icon, Input, Button, Checkbox,message } from 'antd'
-import {login} from '../../services/service'
+import {login,newUser} from '../../services/service'
 import cookie from 'js-cookie';
 
 const FormItem = Form.Item;
@@ -48,7 +48,8 @@ export default class Login extends React.Component{
                 // hashHistory.push('/app')
                 if(values.password === values.beSure){
                     this.setState({
-                        visible:true
+                        visible:true,
+                        new:values
                     })
                 }else{
                     message.error('2次密码不一致',3)
@@ -107,6 +108,58 @@ export default class Login extends React.Component{
         })
     };
 
+    success =()=>{
+        if((this.state.name&& this.state.tel)!= ''){
+            let data = {
+                adminName:this.state.new.adminName,
+                password:this.state.new.password,
+                trueName:this.state.name,
+                tel:this.state.tel,
+                roleId:'2'
+            };
+            newUser(data).then(({jsonResult})=>{
+                if(jsonResult){
+                    this.setState({
+                        visible:false
+                    },()=>{
+                        message.success('创建成功');
+                        login(data,2).then(({jsonResult})=>{
+                            // console.log(values);
+                            // console.log(jsonResult);
+                            if(jsonResult.msg === "登录成功"){
+                                console.log(jsonResult);
+                                cookie.set('token',jsonResult.data.token);
+                                cookie.set('qiNiuToken',jsonResult.data.qiuNiuToken);
+                                cookie.set('userName',jsonResult.data.admin.adminName);
+                                cookie.set('roleId',jsonResult.data.admin.roleId);
+                                cookie.set('adminId',jsonResult.data.admin.adminId);
+                                hashHistory.push('/studioList')
+                            }else{
+                                message.error('登录失败，'+jsonResult.msg)
+                            }
+                        })
+                    })
+                }
+            })
+        }else{
+            message.error('请输入姓名和联系方式')
+        }
+    };
+
+    input =(v)=>{
+        return (e)=>{
+            if(v === 'name'){
+                this.setState({
+                    name:e.target.value
+                })
+            }else if(v === 'tel'){
+                this.setState({
+                    tel:e.target.value
+                })
+            }
+        }
+    };
+
     render =()=>{
         const { getFieldDecorator } = this.props.form;
         const style = {
@@ -137,12 +190,12 @@ export default class Login extends React.Component{
                  <div className="modal-body">
                      <div className="modal-body-head">完善资料</div>
                      <div className="modal-body-content">
-                         <input placeholder="我们该如何称呼您（姓名）"/>
-                         <input placeholder="我们该如何联系你（手机号码）"/>
+                         <input onChange={this.input('name')} placeholder="我们该如何称呼您（姓名）"/>
+                         <input onChange={this.input('tel')} placeholder="我们该如何联系你（手机号码）"/>
                          <input/>
                      </div>
                      <div className="modal-body-foot">
-                         <div className="modal-body-foot-btn">完成</div>
+                         <div className="modal-body-foot-btn" onClick={this.success}>完成</div>
                          <div className="modal-body-foot-btn" onClick={this.cancel}>取消</div>
                      </div>
                  </div>
