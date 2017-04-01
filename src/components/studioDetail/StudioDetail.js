@@ -334,11 +334,22 @@ export default class StudioDetail extends React.Component {
 
     pass = ()=> {
         let that = this.state.data.cloudImageId;
+        let thatId = this.props.params.id;
+        let _this = this;
         confirm({
             title: '审核',
             content: '确认通过审核？',
             onOk() {
-                verify(that).then(()=>{message.success('操作成功')}
+                verify(that).then(()=>{
+                    message.success('操作成功');
+                        getSingleDataImg(thatId)
+                            .then(({jsonResult}) => {
+                                console.log(jsonResult.data);
+                                _this.setState({
+                                    data: jsonResult.data
+                                });
+                            });
+                }
                 )
             },
             onCancel() {
@@ -397,16 +408,26 @@ export default class StudioDetail extends React.Component {
         } else if (state === 2) {
             return (
                 <div>
-                    <div style={{color: 'red'}}>审核失败</div>
-                    {cookie.get('roleId') === '2' ? <div>审核失败，请耐心等待，给您带来的不便，我们感到非常抱歉</div> : ''}
+                    <div style={{color: 'red'}}>审核未通过</div>
+                    {cookie.get('roleId') === '2' ? <div>拒绝理由:{this.state.data.verifyComment}，审核失败，给您带来的不便，我们感到非常抱歉</div> : ''}
                 </div>
             )
         } else {
-            return (
-                <div>
-                    <div style={{color: 'green'}}>审核成功</div>
-                </div>
-            )
+            if(this.state.data.state === 2){
+                return (
+                    <div>
+                        <div style={{color: 'green'}}>审核成功（发布成功）</div>
+                        {cookie.get('roleId') === '2' ? <div>您可以使用APP进行AR体验啦</div> : ''}
+                    </div>
+                )
+            }else if(this.state.data.state === 3){
+                return (
+                    <div>
+                        <div style={{color: 'green'}}>审核成功（发布失败）</div>
+                        {cookie.get('roleId') === '2' ? <div>发布失败，请检查图片，未知、无法解决的问题请联系系统管理员：15602321739</div> : ''}
+                    </div>
+                )
+            }
         }
 
     };

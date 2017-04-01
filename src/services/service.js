@@ -40,8 +40,8 @@ export async function getAdmin(adminName='',trueName=''){
     return xFetch('/api/admin?all=true&adminName='+adminName+'&trueName='+trueName)
 }
 
-export async function getData(data='',adminId='',verifyState='',albumName='') {
-    return xFetch('/api/album?pageNum='+data+'&pageSize=8&adminId='+adminId+'&verifyState='+verifyState+'&albumName='+albumName);
+export async function getData(data='',adminId='',verifyState='',albumName='',state='') {
+    return xFetch('/api/album?pageNum='+data+'&pageSize=8&adminId='+adminId+'&verifyState='+verifyState+'&albumName='+albumName+'&state='+state);
 }
 export async function postData(data) {
   return xFetch(
@@ -81,8 +81,8 @@ export async function delSingleData(id,value) {
         );
     }
 }
-export async function getDataImg(data='',adminId='',verifyState='',companyName='') {
-    return xFetch('/api/cloudImage?pageNum='+data+'&pageSize=8&adminId='+adminId+'&verifyState='+verifyState+'&companyName='+companyName);
+export async function getDataImg(data='',adminId='',verifyState='',companyName='',state='') {
+    return xFetch('/api/cloudImage?pageNum='+data+'&pageSize=8&adminId='+adminId+'&verifyState='+verifyState+'&companyName='+companyName+'&state='+state);
 }
 
 export async function postNewImg(id,data) {

@@ -15,7 +15,8 @@ export default class StudioList extends React.Component {
         loading: 1,
         new: true,
         choose:'',
-        search:''
+        search:'',
+        ver:''
     };
 
     componentDidMount() {
@@ -94,7 +95,7 @@ export default class StudioList extends React.Component {
         if (cookie.get('roleId') === '2') {
             switch (value) {
                 case 'all':
-                    getDataImg('', cookie.get('adminId'),'',this.state.search).then(({jsonResult})=>this.setState({
+                    getDataImg('', cookie.get('adminId'),'',this.state.search,this.state.ver).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
@@ -103,7 +104,7 @@ export default class StudioList extends React.Component {
                     }));
                     break;
                 case 'ing':
-                    getDataImg('', cookie.get('adminId'), 1,this.state.search).then(({jsonResult})=>this.setState({
+                    getDataImg('', cookie.get('adminId'), 1,this.state.search,this.state.ver).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
@@ -112,7 +113,7 @@ export default class StudioList extends React.Component {
                     }));
                     break;
                 case 'ed':
-                    getDataImg('', cookie.get('adminId'), 3,this.state.search).then(({jsonResult})=>this.setState({
+                    getDataImg('', cookie.get('adminId'), 3,this.state.search,this.state.ver).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
@@ -121,7 +122,7 @@ export default class StudioList extends React.Component {
                     }));
                     break;
                 case 'false':
-                    getDataImg('', cookie.get('adminId'), 2,this.state.search).then(({jsonResult})=>this.setState({
+                    getDataImg('', cookie.get('adminId'), 2,this.state.search,this.state.ver).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
@@ -133,7 +134,7 @@ export default class StudioList extends React.Component {
         } else {
             switch (value) {
                 case 'all':
-                    getDataImg('','','',this.state.search).then(({jsonResult})=>this.setState({
+                    getDataImg('','','',this.state.search,this.state.ver).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
@@ -142,7 +143,7 @@ export default class StudioList extends React.Component {
                     }));
                     break;
                 case 'ing':
-                    getDataImg('', '', 1,this.state.search).then(({jsonResult})=>this.setState({
+                    getDataImg('', '', 1,this.state.search,this.state.ver).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
@@ -151,7 +152,7 @@ export default class StudioList extends React.Component {
                     }));
                     break;
                 case 'ed':
-                    getDataImg('', '', 3,this.state.search).then(({jsonResult})=>this.setState({
+                    getDataImg('', '', 3,this.state.search,this.state.ver).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
@@ -160,12 +161,76 @@ export default class StudioList extends React.Component {
                     }));
                     break;
                 case 'false':
-                    getDataImg('', '', 2,this.state.search).then(({jsonResult})=>this.setState({
+                    getDataImg('', '', 2,this.state.search,this.state.ver).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
                         new: false,
                         choose:2
+                    }));
+                    break;
+            }
+        }
+    };
+
+    handleChangeVer = (value)=> {
+        if (cookie.get('roleId') === '2') {
+            switch (value) {
+                case 'all':
+                    getDataImg('', cookie.get('adminId'),this.state.choose,this.state.search,'').then(({jsonResult})=>this.setState({
+                        data: jsonResult.data.list,
+                        display: 1,
+                        loading: 0,
+                        new: false,
+                        ver: ''
+                    }));
+                    break;
+                case 'ed':
+                    getDataImg('', cookie.get('adminId'),this.state.choose,this.state.search,2).then(({jsonResult})=>this.setState({
+                        data: jsonResult.data.list,
+                        display: 1,
+                        loading: 0,
+                        new: false,
+                        ver:2
+                    }));
+                    break;
+                case 'false':
+                    getDataImg('', cookie.get('adminId'),this.state.choose,this.state.search,3).then(({jsonResult})=>this.setState({
+                        data: jsonResult.data.list,
+                        display: 1,
+                        loading: 0,
+                        new: false,
+                        ver:3
+                    }));
+                    break;
+            }
+        } else {
+            switch (value) {
+                case 'all':
+                    getDataImg('','',this.state.choose,this.state.search,this.state.ver).then(({jsonResult})=>this.setState({
+                        data: jsonResult.data.list,
+                        display: 1,
+                        loading: 0,
+                        new: false,
+                        ver:''
+                    }));
+                    break;
+                case 'ed':
+                    getDataImg('', '',this.state.choose,this.state.search,2).then(({jsonResult})=>this.setState({
+                        data: jsonResult.data.list,
+                        display: 1,
+                        loading: 0,
+                        new: false,
+                        ver:2
+                    }));
+                    break;
+                case 'false':
+                    getDataImg('', '',this.state.choose,this.state.search,3).then(({jsonResult})=>this.setState({
+                        data: jsonResult.data.list,
+                        display: 1,
+                        loading: 0,
+                        new: false,
+                        ver:3
                     }));
                     break;
             }
@@ -186,14 +251,14 @@ export default class StudioList extends React.Component {
         });
         console.log(e.target.value);
         if (cookie.get('roleId') === '2') {
-            getDataImg('', cookie.get('adminId'), this.state.choose, e.target.value).then(({jsonResult})=>this.setState({
+            getDataImg('', cookie.get('adminId'), this.state.choose, e.target.value,this.state.ver).then(({jsonResult})=>this.setState({
                 data: jsonResult.data.list,
                 display: 1,
                 loading: 0,
                 new: false,
             }));
         } else {
-            getDataImg('', '', this.state.choose, e.target.value).then(({jsonResult})=>this.setState({
+            getDataImg('', '', this.state.choose, e.target.value,this.state.ver).then(({jsonResult})=>this.setState({
                 data: jsonResult.data.list,
                 display: 1,
                 loading: 0,
@@ -230,20 +295,29 @@ export default class StudioList extends React.Component {
                             <div className="something" key={index} onClick={detail(item.cloudImageId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
-                                <p style={{color: '#fa5a5f', fontSize: '14px'}}>处理失败，请重新提交</p>
+                                <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核失败，请重新提交</p>
                                 <div className="gray">{item.companyName}</div>
                             </div>
                         )
                     }
                     if (item.verifyState  === 3) {
-                        return (
-                            <div className="something" key={index} onClick={detail(item.cloudImageId)}>
-                                <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
-                                <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
-                                <p style={{color: '#13a870', fontSize: '14px'}}>提交成功</p>
-                                <div className="gray">{item.companyName}</div>
-                            </div>
-                        )
+                        if(item.state === 2){
+                            return (
+                                <div className="something" key={index} onClick={detail(item.albumId)}>
+                                    <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
+                                    <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
+                                    <p style={{color: '#13a870', fontSize: '14px'}}>审核通过（发布成功）</p>
+                                    <div className="gray">{item.albumName}</div>
+                                </div>)
+                        }else if(item.state === 3){
+                            return (
+                                <div className="something" key={index} onClick={detail(item.albumId)}>
+                                    <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
+                                    <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
+                                    <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核通过（发布失败）</p>
+                                    <div className="gray">{item.albumName}</div>
+                                </div>)
+                        }
                     }
                 })
             )
@@ -265,7 +339,13 @@ export default class StudioList extends React.Component {
                     <div className="btn">添加名片</div>
                 </Link> : ''}
                 <div style={{float: 'right', marginBottom: '30px'}}>
-                    <span style={{marginRight: '10px'}}>审核状态</span>
+                    <span style={{marginRight: '10px'}}>发布状态</span>
+                    <Select size="large" defaultValue='all' style={{width: 100}} onChange={this.handleChangeVer}>
+                        <Option value="all">全部</Option>
+                        <Option value="ed">已通过</Option>
+                        <Option value="false">未通过</Option>
+                    </Select>
+                    <span style={{marginRight: '10px',marginLeft:'10px'}}>审核状态</span>
                     <Select size="large" defaultValue={cookie.get('roleId') === '2' ?'all':'ing'} style={{width: 100}} onChange={this.handleChange}>
                         <Option value="all">全部</Option>
                         <Option value="ing">审核中</Option>
