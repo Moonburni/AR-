@@ -186,21 +186,21 @@ export default class StudioList extends React.Component {
                     }));
                     break;
                 case 'ed':
-                    getDataImg('', cookie.get('adminId'),this.state.choose,this.state.search,2).then(({jsonResult})=>this.setState({
-                        data: jsonResult.data.list,
-                        display: 1,
-                        loading: 0,
-                        new: false,
-                        ver:2
-                    }));
-                    break;
-                case 'false':
                     getDataImg('', cookie.get('adminId'),this.state.choose,this.state.search,3).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
                         new: false,
                         ver:3
+                    }));
+                    break;
+                case 'false':
+                    getDataImg('', cookie.get('adminId'),this.state.choose,this.state.search,2).then(({jsonResult})=>this.setState({
+                        data: jsonResult.data.list,
+                        display: 1,
+                        loading: 0,
+                        new: false,
+                        ver:2
                     }));
                     break;
             }
@@ -216,21 +216,21 @@ export default class StudioList extends React.Component {
                     }));
                     break;
                 case 'ed':
-                    getDataImg('', '',this.state.choose,this.state.search,2).then(({jsonResult})=>this.setState({
-                        data: jsonResult.data.list,
-                        display: 1,
-                        loading: 0,
-                        new: false,
-                        ver:2
-                    }));
-                    break;
-                case 'false':
                     getDataImg('', '',this.state.choose,this.state.search,3).then(({jsonResult})=>this.setState({
                         data: jsonResult.data.list,
                         display: 1,
                         loading: 0,
                         new: false,
                         ver:3
+                    }));
+                    break;
+                case 'false':
+                    getDataImg('', '',this.state.choose,this.state.search,2).then(({jsonResult})=>this.setState({
+                        data: jsonResult.data.list,
+                        display: 1,
+                        loading: 0,
+                        new: false,
+                        ver:2
                     }));
                     break;
             }

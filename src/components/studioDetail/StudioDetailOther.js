@@ -53,7 +53,7 @@ export default class StudioDetailOther extends React.Component {
                                     update: false
                                 });
                             })
-                    );
+                    ).catch((e)=>message.error(e));
                 } else {
                     postNew(this.state.data.albumId, this.state.newList).then(
                         ()=>getSingleData(this.props.params.id)
@@ -65,7 +65,7 @@ export default class StudioDetailOther extends React.Component {
                                     newKey: this.state.newKey + 1
                                 });
                             })
-                    );
+                    ).catch((e)=>message.error(e));
                 }
             } else {
                 message.error('图片与视频数量不符或名字不相同')
