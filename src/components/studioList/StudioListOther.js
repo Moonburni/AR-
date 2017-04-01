@@ -299,7 +299,7 @@ export default class StudioListOther extends React.Component {
                         )
                     }
                     if (item.verifyState  === 3) {
-                        if(item.state === 2){
+                        if(item.state === 3){
                             return (
                                 <div className="something" key={index} onClick={detail(item.albumId)}>
                                     <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
@@ -307,7 +307,7 @@ export default class StudioListOther extends React.Component {
                                     <p style={{color: '#13a870', fontSize: '14px'}}>审核通过（发布成功）</p>
                                     <div className="gray">{item.albumName}</div>
                                 </div>)
-                        }else if(item.state === 3){
+                        }else if(item.state === 2){
                             return (
                                 <div className="something" key={index} onClick={detail(item.albumId)}>
                                     <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>

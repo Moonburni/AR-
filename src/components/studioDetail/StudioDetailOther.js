@@ -384,14 +384,14 @@ export default class StudioDetailOther extends React.Component {
                 </div>
             )
         } else {
-            if(this.state.data.state === 2){
+            if(this.state.data.state === 3){
                 return (
                     <div>
                         <div style={{color: 'green'}}>审核成功（发布成功）</div>
                         {cookie.get('roleId') === '2' ? <div>您可以使用APP进行AR体验啦</div> : ''}
                     </div>
                 )
-            }else if(this.state.data.state === 3){
+            }else if(this.state.data.state === 2){
                 return (
                     <div>
                         <div style={{color: 'green'}}>审核成功（发布失败）</div>

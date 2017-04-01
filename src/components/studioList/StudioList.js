@@ -301,17 +301,17 @@ export default class StudioList extends React.Component {
                         )
                     }
                     if (item.verifyState  === 3) {
-                        if(item.state === 2){
+                        if(item.state === 3){
                             return (
-                                <div className="something" key={index} onClick={detail(item.albumId)}>
+                                <div className="something" key={index} onClick={detail(item.cloudImageId)}>
                                     <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                     <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                     <p style={{color: '#13a870', fontSize: '14px'}}>审核通过（发布成功）</p>
                                     <div className="gray">{item.albumName}</div>
                                 </div>)
-                        }else if(item.state === 3){
+                        }else if(item.state === 2){
                             return (
-                                <div className="something" key={index} onClick={detail(item.albumId)}>
+                                <div className="something" key={index} onClick={detail(item.cloudImageId)}>
                                     <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                     <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
                                     <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核通过（发布失败）</p>
