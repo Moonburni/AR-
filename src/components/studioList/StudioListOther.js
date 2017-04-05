@@ -340,8 +340,8 @@ export default class StudioListOther extends React.Component {
                     <span style={{marginRight: '10px'}}>发布状态</span>
                     <Select size="large" defaultValue='all' style={{width: 100}} onChange={this.handleChangeVer}>
                         <Option value="all">全部</Option>
-                        <Option value="ed">已通过</Option>
-                        <Option value="false">未通过</Option>
+                        <Option value="ed">发布通过</Option>
+                        <Option value="false">发布失败</Option>
                     </Select>
                     <span style={{marginRight: '10px',marginLeft:'10px'}}>审核状态</span>
                     <Select size="large" defaultValue={cookie.get('roleId') === '2' ?'all':'ing'} style={{width: 100}} onChange={this.handleChange}>

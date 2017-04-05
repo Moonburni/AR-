@@ -338,7 +338,7 @@ export default class StudioDetail extends React.Component {
         let _this = this;
         confirm({
             title: '审核',
-            content: '确认通过审核？',
+            content: '通过之后就要发布了哦？',
             onOk() {
                 verify(that).then(()=>{
                     message.success('操作成功');
@@ -359,36 +359,12 @@ export default class StudioDetail extends React.Component {
     };
 
     videoDel = (value)=> {
-        return ()=> {
-            // console.log(value);
-            confirm({
-                title: '是否删除此影集?',
-                content: '删除后将不可恢复',
-                onOk() {
-                    delSingleDataImg(value.albumId, value.photoId)
-                        .then(({jsonResult})=> {
-                            if (jsonResult.success) {
-                                message.success('删除成功');
-                                getSingleDataImg(this.props.params.id)
-                                    .then(({jsonResult}) => {
-                                        console.log(jsonResult.data);
-                                        this.setState({
-                                            data: jsonResult.data
-                                        });
-                                    });
-                            }
-                        });
-                },
-                onCancel() {
-                },
-            });
-        };
-
+           return false
     };
 
     videoUpdate = (value)=> {
         return ()=> {
-            console.log(value);
+            // console.log(value);
             this.setState({
                 visible: true,
                 update: true,
@@ -416,14 +392,14 @@ export default class StudioDetail extends React.Component {
             if(this.state.data.state === 3){
                 return (
                     <div>
-                        <div style={{color: 'green'}}>审核成功（发布成功）</div>
+                        <div style={{color: 'green'}}>审核通过（发布成功）</div>
                         {cookie.get('roleId') === '2' ? <div>您可以使用APP进行AR体验啦</div> : ''}
                     </div>
                 )
             }else if(this.state.data.state === 2){
                 return (
                     <div>
-                        <div style={{color: 'green'}}>审核成功（发布失败）</div>
+                        <div style={{color: 'green'}}>审核通过（发布失败）</div>
                         {cookie.get('roleId') === '2' ? <div>发布失败，请检查图片，未知、无法解决的问题请联系系统管理员：15602321739</div> : ''}
                     </div>
                 )
@@ -464,8 +440,22 @@ export default class StudioDetail extends React.Component {
                             cookie.get('roleId') === '2' ?
                                 <div style={this.style.title}>名片详情</div> :
                                 <div>
-                                    <div className="btn" onClick={this.changePartTwo}>拒绝</div>
-                                    <div className="btn" onClick={this.pass}>通过</div>
+                                    {
+                                        this.state.data.verifyState === 1?
+                                        <button className="btn" onClick={this.changePartTwo}>拒绝</button>:
+                                            <button disabled={true} style={{backgroundColor:'grey'}} className="btn" onClick={this.changePartTwo}>拒绝</button>
+                                    }
+                                    {
+                                        this.state.data.verifyState === 1?
+                                            <button className="btn" onClick={this.pass}>通过</button>:
+                                            <button
+                                                disabled={this.state.data.state !== 3}
+                                                style={this.state.data.state === 3?{backgroundColor:'grey'}:{}}
+                                                className="btn"
+                                                onClick={this.pass}>
+                                                {this.state.data.state === 3?'通过':'重新提交'}
+                                            </button>
+                                    }
                                 </div>
                         }
                         {cookie.get('roleId') === '2' ? <div className="deleteTitle" onClick={this.del}>删除</div> : ''}

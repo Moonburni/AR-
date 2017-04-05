@@ -59,7 +59,7 @@ export default class VideoBuild extends React.Component {
                                         <div className="videoAction">
                                             <span onClick={this.videoVisible.bind(this, index)}>查看视频资源</span>
                                             <span onClick={videoUpdate(item)}>更新</span>
-                                            <span onClick={videoDelete(item)}>删除</span>
+                                            {videoDelete(item) === false?'':<span onClick={videoDelete(item)}>删除</span>}
                                         </div> :
                                         <div className="videoAction">
                                             <span onClick={this.videoVisible.bind(this, index)}>查看视频资源</span>

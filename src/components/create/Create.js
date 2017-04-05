@@ -1,7 +1,7 @@
 import React from 'react'
 import {Breadcrumb, Upload, Icon, message, Input, notification, Select} from 'antd';
 import {RouteHandler, hashHistory, Link} from "react-router"
-import './creat.css'
+// import './creat.css'
 import {qiNiu, qiNiuDomain} from '../../../config'
 import {postDataImg} from '../../services/service'
 import cookie from 'js-cookie';
@@ -25,27 +25,15 @@ export default class Create extends React.Component {
 
     beforeUploadOther = (file)=> {
         const isLt20MB = ()=> {
-            if (file.type.indexOf('image/') === -1 && file.size / 1024 / 1024 > 100) {
-                return false
-            } else {
-                return true
-            }
+            return !(file.type.indexOf('image/') === -1 && file.size / 1024 / 1024 > 100);
         };
 
         const isLt2MB = ()=> {
-            if (file.type.indexOf('video/mp4') === -1 && file.size / 1024 / 1024 > 2) {
-                return false
-            } else {
-                return true
-            }
+            return !(file.type.indexOf('video/mp4') === -1 && file.size / 1024 / 1024 > 2);
         };
 
         const isType = ()=> {
-            if (file.type.indexOf('image/') === -1 && file.type.indexOf('video/mp4') === -1) {
-                return false
-            } else {
-                return true
-            }
+            return !(file.type.indexOf('image/') === -1 && file.type.indexOf('video/mp4') === -1);
         };
         if (!isType()) {
             this.openNotificationWithIcon('error', '只能上传图片或者Mp4格式的视频');
@@ -111,8 +99,8 @@ export default class Create extends React.Component {
     };
     handleChangeOther = (info) => {
         if (info.file.status === 'done') {
-        this.getBase64(info.file.originFileObj, imageUrl1 => this.setState({imageUrl1}));
         // console.log(info);
+            message.success(`${info.file.name}上传成功`);
         this.state.lastList = info.fileList.concat(this.state.fileList);
         if (info.file.type === 'video/mp4') {
         // console.log(this.state.fileWeight);
@@ -124,15 +112,9 @@ export default class Create extends React.Component {
     }
     };
 
-    getBase64 = (img, callback)=> {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => callback(reader.result));
-        reader.readAsDataURL(img)
-    };
 
     render = () => {
         const imageUrl = this.state.imageUrl;
-        const imageUrl1 = this.state.imageUrl1;
         const move = () => {
             let data = {
                 address: document.getElementById('address').value,
@@ -180,7 +162,7 @@ export default class Create extends React.Component {
                 lost.forEach((item)=> {
                     lostName += ('' + item + '')
                 });
-                console.log(lostName);
+                // console.log(lostName);
                 message.error('请提交' + lostName + '的对应文件', 3);
                 lost = [];
             } else if (video.length > img.length) {
@@ -221,7 +203,7 @@ export default class Create extends React.Component {
                             document.getElementById('createContent').className = 'createContent move moveOther';
                             document.documentElement.scrollTop = document.body.scrollTop = 0
                         }
-                    })
+                    }).catch((e)=>message.error(e))
                 }
             }
         };
@@ -239,13 +221,6 @@ export default class Create extends React.Component {
                 key: 'photo/' + file.name
             });
         };
-
-        // const selectBefore = (
-        //     <Select defaultValue="Http://" style={{ width: 80 }}>
-        //         <Option value="Http://">Http://</Option>
-        //         <Option value="Https://">Https://</Option>
-        //     </Select>
-        // );
 
         return (
             <div className="create cloud">
@@ -335,7 +310,6 @@ export default class Create extends React.Component {
                                     <Upload
                                         className="avatar-uploader"
                                         name="file"
-                                        showUploadList={true}
                                         action={qiNiu}
                                         beforeUpload={this.beforeUploadOther}
                                         onChange={this.handleChangeOther}
@@ -343,11 +317,7 @@ export default class Create extends React.Component {
                                         multiple={true}
                                         onRemove={this.removeFile}
                                     >
-                                        {
-                                            imageUrl1 ?
-                                                <Icon type="plus" className="avatar-uploader-trigger"/> :
-                                                <Icon type="plus" className="avatar-uploader-trigger"/>
-                                        }
+                                        <Icon type="plus" className="avatar-uploader-trigger"/>
                                     </Upload>
                                 </div>
                                 <span style={{

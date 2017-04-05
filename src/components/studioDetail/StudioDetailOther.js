@@ -337,7 +337,7 @@ export default class StudioDetailOther extends React.Component {
         let _this = this;
         confirm({
             title: '审核',
-            content: '确认通过审核？',
+            content: '通过之后就要发布了哦？',
             onOk() {
                 verifyOther(that).then(()=>{
                     message.success('操作成功');
@@ -387,14 +387,14 @@ export default class StudioDetailOther extends React.Component {
             if(this.state.data.state === 3){
                 return (
                     <div>
-                        <div style={{color: 'green'}}>审核成功（发布成功）</div>
+                        <div style={{color: 'green'}}>审核通过（发布成功）</div>
                         {cookie.get('roleId') === '2' ? <div>您可以使用APP进行AR体验啦</div> : ''}
                     </div>
                 )
             }else if(this.state.data.state === 2){
                 return (
                     <div>
-                        <div style={{color: 'green'}}>审核成功（发布失败）</div>
+                        <div style={{color: 'green'}}>审核通过（发布失败）</div>
                         {cookie.get('roleId') === '2' ? <div>发布失败，请检查图片，未知、无法解决的问题请联系系统管理员：15602321739</div> : ''}
                     </div>
                 )
