@@ -96,24 +96,50 @@ export default class Header extends React.Component{
            if(this.state.tel != ''){
                data = {...data,tel:this.state.tel}
            }
-           postName(cookie.get('adminId'),data).then(({jsonResult})=>{
-               if(jsonResult){
-                   message.success('修改成功');
-                   if(this.state.name != ''){
-                       cookie.set('userName',this.state.name);
-                   }
-                   this.setState(
-                       {
-                           visible: false,
-                           mon:this.state.mon+1,
-                           name:'',
-                           old:'',
-                           new:'',
-                           repeat:'',
-                           tel:'',
-                       });
+           if(data.tel){
+               if(!(/^1[34578]\d{9}$/.test(data.tel))){
+                   message.error("手机号码有误，请重填");
                }
-           }).catch((e)=> message.error(e))
+               else {
+                   postName(cookie.get('adminId'),data).then(({jsonResult})=>{
+                       if(jsonResult){
+                           message.success('修改成功');
+                           if(this.state.name != ''){
+                               cookie.set('userName',this.state.name);
+                           }
+                           this.setState(
+                               {
+                                   visible: false,
+                                   mon:this.state.mon+1,
+                                   name:'',
+                                   old:'',
+                                   new:'',
+                                   repeat:'',
+                                   tel:'',
+                               });
+                       }
+                   }).catch((e)=> message.error(e))
+               }
+           }else {
+               postName(cookie.get('adminId'),data).then(({jsonResult})=>{
+                   if(jsonResult){
+                       message.success('修改成功');
+                       if(this.state.name != ''){
+                           cookie.set('userName',this.state.name);
+                       }
+                       this.setState(
+                           {
+                               visible: false,
+                               mon:this.state.mon+1,
+                               name:'',
+                               old:'',
+                               new:'',
+                               repeat:'',
+                               tel:'',
+                           });
+                   }
+               }).catch((e)=> message.error(e))
+           }
        }
     };
     handleCancel = () => {

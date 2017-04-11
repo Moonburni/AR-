@@ -304,6 +304,7 @@ export default class StudioDetailOther extends React.Component {
     };
 
     videoDel = (value)=> {
+        let _this = this;
         return ()=> {
             // console.log(value);
             confirm({
@@ -314,10 +315,10 @@ export default class StudioDetailOther extends React.Component {
                         .then(({jsonResult})=> {
                             if (jsonResult.success) {
                                 message.success('删除成功');
-                                getSingleData(this.props.params.id)
+                                getSingleData(_this.props.params.id)
                                     .then(({jsonResult}) => {
-                                        console.log(jsonResult.data);
-                                        this.setState({
+                                        // console.log(jsonResult.data);
+                                        _this.setState({
                                             data: jsonResult.data
                                         });
                                     });

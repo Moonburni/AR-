@@ -110,37 +110,42 @@ export default class Login extends React.Component{
 
     success =()=>{
         if((this.state.name&& this.state.tel)!= ''){
-            let data = {
-                adminName:this.state.new.adminName,
-                password:this.state.new.password,
-                trueName:this.state.name,
-                tel:this.state.tel,
-                roleId:'2'
-            };
-            newUser(data).then(({jsonResult})=>{
-                if(jsonResult){
-                    this.setState({
-                        visible:false
-                    },()=>{
-                        message.success('创建成功');
-                        login(data,2).then(({jsonResult})=>{
-                            // console.log(values);
-                            // console.log(jsonResult);
-                            if(jsonResult.msg === "登录成功"){
-                                console.log(jsonResult);
-                                cookie.set('token',jsonResult.data.token);
-                                cookie.set('qiNiuToken',jsonResult.data.qiuNiuToken);
-                                cookie.set('userName',jsonResult.data.admin.adminName);
-                                cookie.set('roleId',jsonResult.data.admin.roleId);
-                                cookie.set('adminId',jsonResult.data.admin.adminId);
-                                hashHistory.push('/studioList')
-                            }else{
-                                message.error('登录失败，'+jsonResult.msg)
-                            }
+            if(!(/^1[34578]\d{9}$/.test(this.state.tel))){
+                message.error("手机号码有误，请重填");
+            }
+            else {
+                let data = {
+                    adminName:this.state.new.adminName,
+                    password:this.state.new.password,
+                    trueName:this.state.name,
+                    tel:this.state.tel,
+                    roleId:'2'
+                };
+                newUser(data).then(({jsonResult})=>{
+                    if(jsonResult){
+                        this.setState({
+                            visible:false
+                        },()=>{
+                            message.success('创建成功');
+                            login(data,2).then(({jsonResult})=>{
+                                // console.log(values);
+                                // console.log(jsonResult);
+                                if(jsonResult.msg === "登录成功"){
+                                    console.log(jsonResult);
+                                    cookie.set('token',jsonResult.data.token);
+                                    cookie.set('qiNiuToken',jsonResult.data.qiuNiuToken);
+                                    cookie.set('userName',jsonResult.data.admin.adminName);
+                                    cookie.set('roleId',jsonResult.data.admin.roleId);
+                                    cookie.set('adminId',jsonResult.data.admin.adminId);
+                                    hashHistory.push('/studioList')
+                                }else{
+                                    message.error('登录失败，'+jsonResult.msg)
+                                }
+                            })
                         })
-                    })
-                }
-            })
+                    }
+                })
+            }
         }else{
             message.error('请输入姓名和联系方式')
         }
