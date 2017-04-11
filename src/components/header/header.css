@@ -23,16 +23,7 @@ header .headerContent>div> span{
   height: 48px;
   margin-top: 12px;
 }
-/*header .headerContent p:after{*/
-  /*content: '';*/
-  /*position: absolute;*/
-  /*width: 100px;*/
-  /*height: 4px;*/
-  /*border-radius: 2px;*/
-  /*background-color: #ffcb00;*/
-  /*margin-top: 68px;*/
-  /*margin-left: -70px;*/
-/*}*/
+
 .headerContent>img{
   right: 124px;
   width: 48px;
@@ -46,6 +37,19 @@ header .headerContent>div> span{
   font-size: 20px;
   line-height: 72px;
   color: #999999;
+  width: 80px;
+  cursor: pointer;
+  text-align: center;
+}
+.named>div{
+    display: none;
+}
+.named:hover>div{
+    display:block;
+}
+.named>div>div{
+  height: 48px;
+  line-height: 48px;
 }
 .iconP{
   font-size: 24px;

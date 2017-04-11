@@ -35,6 +35,25 @@ export async function postAdmin(id,data) {
     );
 }
 
+export async function postPassword(data) {
+    return xFetch(
+        `/api/admin/password`,
+        {
+            method: 'PUT',
+            body: JSON.stringify(data)
+        },
+    );
+}
+
+export async function postName(id,data) {
+    return xFetch(
+        `/api/admin/${id}`,
+        {
+            method: 'PUT',
+            body: JSON.stringify(data)
+        },
+    );
+}
 
 export async function getAdmin(adminName='',trueName=''){
     return xFetch('/api/admin?all=true&adminName='+adminName+'&trueName='+trueName)

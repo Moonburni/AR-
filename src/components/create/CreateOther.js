@@ -35,8 +35,7 @@ export default class CreateOther extends React.Component {
 
     handleChangeOther = (info) => {
         if (info.file.status === 'done') {
-            this.getBase64(info.file.originFileObj, imageUrl1 => this.setState({imageUrl1}));
-            // console.log(info);
+            message.success(`${info.file.name}上传成功`);
             this.state.lastList = info.fileList.concat(this.state.fileList);
             if (info.file.type === 'video/mp4') {
                 // console.log(this.state.fileWeight);
@@ -312,11 +311,7 @@ export default class CreateOther extends React.Component {
                                         multiple={true}
                                         onRemove={this.removeFile}
                                     >
-                                        {
-                                            imageUrl1 ?
-                                                <Icon type="plus" className="avatar-uploader-trigger"/> :
-                                                <Icon type="plus" className="avatar-uploader-trigger"/>
-                                        }
+                                        <Icon type="plus" className="avatar-uploader-trigger"/>
                                     </Upload>
                                 </div>
                                 <span style={{

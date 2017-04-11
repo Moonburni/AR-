@@ -1,5 +1,5 @@
 import React from 'react'
-import {Icon} from 'antd'
+import {Icon,Tooltip } from 'antd'
 import './studioDetail.css'
 import cookie from 'js-cookie'
 
@@ -52,7 +52,11 @@ export default class VideoBuild extends React.Component {
                             <div key={index} className="videoLittleBox">
                                 <div>
                                     <img onClick={this.ImgVisible.bind(this, index)} style={{cursor:'pointer'}} src={`${item.imageUrl}?imageView2/1/w/285/h/160`}/>
-                                    {item.stateComment === null? '': <span className="stateComment">{item.stateComment}</span>}
+                                    {item.stateComment === null? '':
+                                        <Tooltip title={<span>{item.stateComment}</span>}>
+                                          <span className="stateComment">发布失败（查看原因)</span>
+                                        </Tooltip>
+                                    }
                                 </div>
                                 {
                                     cookie.get('roleId') === '2' ?

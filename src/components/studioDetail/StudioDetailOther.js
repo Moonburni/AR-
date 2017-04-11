@@ -436,8 +436,22 @@ export default class StudioDetailOther extends React.Component {
                             cookie.get('roleId') === '2' ?
                                 <div style={this.style.title}>影集详情</div> :
                                 <div>
-                                    <div className="btn" onClick={this.changePartTwo}>拒绝</div>
-                                    <div className="btn" onClick={this.pass}>通过</div>
+                                    {
+                                        this.state.data.verifyState === 1?
+                                            <button className="btn" onClick={this.changePartTwo}>拒绝</button>:
+                                            <button disabled={true} style={{backgroundColor:'grey'}} className="btn" onClick={this.changePartTwo}>拒绝</button>
+                                    }
+                                    {
+                                        this.state.data.verifyState === 1?
+                                            <button className="btn" onClick={this.pass}>通过</button>:
+                                            <button
+                                                disabled={this.state.data.state === 3}
+                                                style={this.state.data.state === 3?{backgroundColor:'grey'}:{}}
+                                                className="btn"
+                                                onClick={this.pass}>
+                                                {this.state.data.state === 3?'通过':'重新提交'}
+                                            </button>
+                                    }
                                 </div>
                         }
                         {

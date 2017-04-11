@@ -449,7 +449,7 @@ export default class StudioDetail extends React.Component {
                                         this.state.data.verifyState === 1?
                                             <button className="btn" onClick={this.pass}>通过</button>:
                                             <button
-                                                disabled={this.state.data.state !== 3}
+                                                disabled={this.state.data.state === 3}
                                                 style={this.state.data.state === 3?{backgroundColor:'grey'}:{}}
                                                 className="btn"
                                                 onClick={this.pass}>

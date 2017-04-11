@@ -28,7 +28,7 @@ export default class Login extends React.Component{
                         console.log(jsonResult);
                         cookie.set('token',jsonResult.data.token);
                         cookie.set('qiNiuToken',jsonResult.data.qiuNiuToken);
-                        cookie.set('userName',jsonResult.data.admin.adminName);
+                        cookie.set('userName',jsonResult.data.admin.trueName);
                         cookie.set('roleId',jsonResult.data.admin.roleId);
                         cookie.set('adminId',jsonResult.data.admin.adminId);
                         hashHistory.push('/studioList')
