@@ -293,7 +293,7 @@ export default class StudioListOther extends React.Component {
                             <div className="something" key={index} onClick={detail(item.albumId)}>
                                 <img src={`${item.coverImageUrl}?imageView2/1/w/200/h/240`}/>
                                 <p>{new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/, ' ')}</p>
-                                <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核失败，请重新提交</p>
+                                <p style={{color: '#fa5a5f', fontSize: '14px'}}>审核未通过</p>
                                 <div className="gray">{item.albumName}</div>
                             </div>
                         )

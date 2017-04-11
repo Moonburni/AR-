@@ -62,29 +62,33 @@ export default class Header extends React.Component{
     };
     handleOk = () => {
        if(this.state.key === true){
-           if(this.state.new === this.state.repeat ){
-               let data = {
-                   newPassword:this.state.new,
-                   oldPassword:this.state.old
-               };
-               postPassword(data).then(({jsonResult})=>{
-                   if(jsonResult){
-                       message.success('修改成功,请重新登录');
-                       this.setState(
-                           {
-                               visible: false,
-                               mon:this.state.mon+1,
-                               name:'',
-                               old:'',
-                               new:'',
-                               repeat:'',
-                               tel:'',
-                           });
-                       hashHistory.push('/')
-                   }
-               }).catch((e)=> message.error(e))
+           if(this.state.new === ''){
+               message.error('密码不为空')
            }else {
-               message.error('密码不一致，请核对')
+               if(this.state.new === this.state.repeat ){
+                   let data = {
+                       newPassword:this.state.new,
+                       oldPassword:this.state.old
+                   };
+                   postPassword(data).then(({jsonResult})=>{
+                       if(jsonResult){
+                           message.success('修改成功,请重新登录');
+                           this.setState(
+                               {
+                                   visible: false,
+                                   mon:this.state.mon+1,
+                                   name:'',
+                                   old:'',
+                                   new:'',
+                                   repeat:'',
+                                   tel:'',
+                               });
+                           hashHistory.push('/')
+                       }
+                   }).catch((e)=> message.error(e))
+               }else {
+                   message.error('密码不一致，请核对')
+               }
            }
        }else {
            let data = {

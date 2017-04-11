@@ -399,6 +399,13 @@ export default class StudioDetailOther extends React.Component {
                         {cookie.get('roleId') === '2' ? <div>发布失败，请检查图片，未知、无法解决的问题请联系系统管理员：15602321739</div> : ''}
                     </div>
                 )
+            }else if(this.state.data.state === 1) {
+                return (
+                    <div>
+                        <div style={{color: 'green'}}>审核通过（发布中）</div>
+                        {cookie.get('roleId') === '2' ? <div>发布中，请耐心等待，给您带来的不便，我们感到非常抱歉</div> : ''}
+                    </div>
+                )
             }
         }
 
@@ -446,11 +453,11 @@ export default class StudioDetailOther extends React.Component {
                                         this.state.data.verifyState === 1?
                                             <button className="btn" onClick={this.pass}>通过</button>:
                                             <button
-                                                disabled={this.state.data.state === 3}
-                                                style={this.state.data.state === 3?{backgroundColor:'grey'}:{}}
+                                                disabled={this.state.data.state != 2}
+                                                style={this.state.data.state != 2?{backgroundColor:'grey'}:{}}
                                                 className="btn"
                                                 onClick={this.pass}>
-                                                {this.state.data.state === 3?'通过':'重新提交'}
+                                                {this.state.data.state === 3?'通过':(this.state.data.state === 1?'发布中':'重新提交')}
                                             </button>
                                     }
                                 </div>

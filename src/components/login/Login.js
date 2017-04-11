@@ -121,7 +121,8 @@ export default class Login extends React.Component{
                     tel:this.state.tel,
                     roleId:'2'
                 };
-                newUser(data).then(({jsonResult})=>{
+                newUser(data)
+                    .then(({jsonResult})=>{
                     if(jsonResult){
                         this.setState({
                             visible:false
@@ -144,7 +145,7 @@ export default class Login extends React.Component{
                             })
                         })
                     }
-                })
+                }).catch((e)=>message.error(e))
             }
         }else{
             message.error('请输入姓名和联系方式')
